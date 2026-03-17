@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  pwn-04:
+    build: .
+    # Syntax: "HOST_PORT:CONTAINER_PORT"
+    # CONTAINER_PORT is always 7681 (what socat listens on inside the container)
+    # HOST_PORT must be unique for every challenge (increment it per challenge)
+    # pwn-04 → 7681:7681
+    # pwn-05 → 7682:7681
+    # pwn-06 → 7683:7681
+    ports:
+      - "10101:10150"
+    restart: always
+    # Security limits to prevent players from crashing the VPS
+    mem_limit: 128m
+    cpus: 0.5
+    read_only: true

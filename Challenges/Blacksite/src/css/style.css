@@ -1,0 +1,219 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #0d1117;
+  --panel:  #161b22;
+  --border: #30363d;
+  --text:   #e6edf3;
+  --muted:  #8b949e;
+  --green:  #3fb950;
+  --blue:   #58a6ff;
+  --amber:  #d29922;
+  --red:    #f85149;
+}
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 28px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+.site-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--blue);
+  letter-spacing: 2px;
+}
+nav { flex: 1; color: var(--muted); font-size: 13px; }
+.logout {
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.logout:hover { color: var(--red); }
+
+/* ── MAIN LAYOUT ── */
+main { flex: 1; padding: 28px; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── PANELS ── */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px;
+}
+.panel h2 {
+  font-size: 16px;
+  color: var(--blue);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.panel h3 {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+/* ── FORM ── */
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 14px 0 5px;
+}
+label small {
+  color: #388bfd;
+  font-size: 11px;
+  margin-left: 6px;
+  opacity: .7;
+}
+input, select, textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color .15s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--blue);
+}
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: .6; }
+select option { background: var(--panel); }
+textarea { resize: vertical; }
+
+button[type=submit] {
+  margin-top: 18px;
+  width: 100%;
+  background: #238636;
+  border: 1px solid #2ea043;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .15s;
+}
+button[type=submit]:hover { background: #2ea043; }
+
+/* ── SIDEBAR ── */
+.side { display: flex; flex-direction: column; gap: 16px; }
+
+/* status */
+.status-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.dot.green { background: var(--green); }
+.dot.amber { background: var(--amber); }
+.dot.red   { background: var(--red); }
+
+/* notices */
+.notices ul { padding-left: 16px; }
+.notices li { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+
+/* preview */
+.preview-panel .result { margin-top: 8px; }
+.preview-panel .result h3 { color: var(--blue); font-size: 14px; margin-bottom: 6px; font-weight: 500; }
+.preview-panel .result hr { border-color: var(--border); margin: 8px 0; }
+.preview-panel .result div { font-size: 13px; color: var(--text); line-height: 1.7; }
+
+/* ── MESSAGES ── */
+.msg-error {
+  background: rgba(248,81,73,.1);
+  border: 1px solid rgba(248,81,73,.3);
+  color: var(--red);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+/* ── LOGIN PAGE ── */
+.login-page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.login-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px;
+  width: 100%;
+  max-width: 360px;
+}
+.logo {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--blue);
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.logo-sub {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 24px;
+}
+.login-box button[type=submit] { margin-top: 14px; }
+.footer-note {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 16px;
+  opacity: .6;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 12px 28px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+footer .warn { color: var(--amber); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  .layout { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,13 @@
+[Unit]
+Description=CTF JWT Flask App
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory=/opt/ctf-jwt/backend
+ExecStart=/usr/bin/python3 /opt/ctf-jwt/backend/app.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
