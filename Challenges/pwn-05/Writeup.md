@@ -15,7 +15,8 @@
 
 Before diving into the binary, we check the standard protections using `checksec`:
 
-> [ Insert screenshot of checksec output here ]
+> <img width="1564" height="109" alt="image" src="https://github.com/user-attachments/assets/d903d03e-15bb-4c15-8d36-91316c0b5649" />
+
 
 **Protections:**
 
