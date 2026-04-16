@@ -42,7 +42,8 @@ The program asks for a length, and then calls `read()` to place our input direct
 read(0, (void *)0x1337000, sc_len);
 ```
 
-> [ Insert screenshot of Ghidra/IDA decompilation of main() showing the read to 0x1337000 ]
+> <img width="1305" height="800" alt="image" src="https://github.com/user-attachments/assets/49017c3a-4980-4873-bf4a-f5f6e27afae3" />
+
 
 At first glance, returning to `0x1337000` should cause a Segmentation Fault because there is no obvious `mmap` call in `main()` allocating this page. However, looking closer at the binary's functions, we find a hidden setup phase.
 
@@ -50,7 +51,8 @@ At first glance, returning to `0x1337000` should cause a Segmentation Fault beca
 
 By checking the binary's constructors or the `.init_array`, we find a strangely named function: `__libc_setup_tls`.
 
-> [ Insert screenshot of GDB "info functions" or Ghidra showing `__libc_setup_tls` ]
+> <img width="864" height="189" alt="image" src="https://github.com/user-attachments/assets/1d190174-01dd-4c90-887a-fe402f65f53b" />
+
 
 Despite its boring name, this function is actually annotated with `__attribute__((constructor))`, meaning it executes **before** `main()`. Inside, we find the real secret:
 
@@ -128,7 +130,8 @@ void vuln(void) {
 
 This is a classic **buffer overflow**. We will overflow the 64-byte buffer, overwrite the saved RBP (8 bytes), and overwrite the saved Return Address (RIP) with `0x1337000`, jumping straight into our staged shellcode.
 
-> [ Insert screenshot of the buffer overflow taking place in GDB, showing the overwritten RIP ]
+> <img width="790" height="343" alt="image" src="https://github.com/user-attachments/assets/cf222c93-a413-4da0-8ef7-18c3ec802cd7" />
+
 
 ---
 
@@ -217,7 +220,8 @@ io.interactive()
 
 Running the script against the target dynamically constructs the shellcode, bypasses the filter, safely pops our hidden RWX page address into the instruction pointer, and prints the flag!
 
-> [ Insert final screenshot of the terminal showing the script executing and printing the FLAG ]
+> <img width="898" height="184" alt="image" src="https://github.com/user-attachments/assets/554294f7-309b-4b01-8062-a352383e7394" />
+
 
 **FLAG{sh3llc0d3r_go_brrrr}**
 
