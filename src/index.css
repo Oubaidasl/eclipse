@@ -675,6 +675,43 @@ select {
   margin-bottom: 4rem;
 }
 
+.registration-page-shell {
+  min-height: 100vh;
+  padding: 2rem 0 3rem;
+}
+
+.registration-page {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.registration-page-header {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.registration-page-copy {
+  max-width: 46rem;
+}
+
+.registration-page-copy h1 {
+  margin: 0;
+  font-size: clamp(2.1rem, 5vw, 4rem);
+  line-height: 1.02;
+}
+
+.registration-page-copy p:last-child {
+  margin: 0.9rem 0 0;
+  color: #b8c7b8;
+  font-family: "Segoe UI", sans-serif;
+  line-height: 1.7;
+}
+
+.back-arrow {
+  transform: rotate(180deg);
+}
+
 .registration-shell {
   width: min(860px, calc(100% - 2rem));
   margin: 3rem auto 4rem;
@@ -903,6 +940,10 @@ select {
   .registration-header,
   .registration-form {
     padding: 1.2rem;
+  }
+
+  .registration-page-shell {
+    padding-top: 1.2rem;
   }
 
   .hero-copy {
