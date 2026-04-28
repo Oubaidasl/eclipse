@@ -156,7 +156,7 @@ function App() {
                 />
                 <div>
                   <p className="eyebrow">Cyber Guardians</p>
-                  <h1 className="brand-title">CYBER GUARDIANS</h1>
+                  <h1 className="brand-title">Eclipse</h1>
                 </div>
               </div>
 
