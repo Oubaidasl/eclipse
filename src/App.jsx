@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
+import { Link, Route, Routes } from 'react-router-dom'
 import heroBackgroundVideo from './assets/vidBackground.mp4'
 import sponsor1Image from './assets/sponsor1.jpeg'
 import sponsor2Image from './assets/sponsor2.png'
+import TeamRegistrationForm from './components/TeamRegistrationForm'
 import {
   FiArrowRight,
   FiCalendar,
@@ -9,11 +11,9 @@ import {
   FiGlobe,
   FiHelpCircle,
   FiMapPin,
-  FiMic,
   FiShield,
   FiTarget,
   FiUsers,
-  FiVideo,
 } from 'react-icons/fi'
 
 const eventDays = [
@@ -96,24 +96,7 @@ const faqItems = [
   },
 ]
 
-const placeholderText = {
-  speaker: 'Speaker image placeholder',
-  gallery: 'Gallery / recap asset placeholder',
-  sponsor: 'Sponsor logo placeholder',
-  organizer: 'Organizer photo placeholder',
-}
-
-function Placeholder({ icon: Icon, label, detail }) {
-  return (
-    <div className="placeholder-tile" role="img" aria-label={label}>
-      <Icon />
-      <span>{label}</span>
-      {detail ? <small>{detail}</small> : null}
-    </div>
-  )
-}
-
-function App() {
+function LandingPage() {
   const [selectedDay, setSelectedDay] = useState(eventDays[0].id)
   const [openFaq, setOpenFaq] = useState(0)
 
@@ -189,10 +172,10 @@ function App() {
             </div>
 
             <div className="hero-actions">
-              <a href="#register" className="primary-action">
+              <Link to="/register" className="primary-action">
                 Register Interest
                 <FiArrowRight />
-              </a>
+              </Link>
               <a href="#agenda" className="secondary-action">
                 Explore Program
               </a>
@@ -342,9 +325,9 @@ function App() {
                 <span>Track Placeholder</span>
               </article>
             </div>
-            <a href="#register" className="secondary-action inline-action">
+            <Link to="/register" className="secondary-action inline-action">
               Add CTF Signup Link Later
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -439,18 +422,52 @@ function App() {
 
         <section id="register" className="content-section cta-section">
           <p className="eyebrow">Registration</p>
-          <h3>Your main CTA can point to a form, ticket page, or CTF portal.</h3>
+          <h3>The main CTA now opens a dedicated registration page for teams.</h3>
           <p>
-            Right now it is a styled placeholder so the layout stays complete
-            without forcing you to commit to the final destination yet.
+            Team name, organization, and player details are collected on a
+            separate screen and submitted through the `register_team` RPC.
           </p>
-          <a href="/" className="primary-action" onClick={(event) => event.preventDefault()}>
-            Placeholder Registration Button
+          <Link to="/register" className="primary-action">
+            Open Team Registration
             <FiArrowRight />
-          </a>
+          </Link>
         </section>
       </main>
     </div>
+  )
+}
+
+function RegistrationPage() {
+  return (
+    <div className="page-shell registration-page-shell">
+      <main className="registration-page">
+        <header className="registration-page-header">
+          <Link to="/" className="secondary-action">
+            <FiArrowRight className="back-arrow" />
+            Back To Event
+          </Link>
+          <div className="registration-page-copy">
+            <p className="eyebrow">Team Registration</p>
+            <h1>Register your Cyber Guardians team</h1>
+            <p>
+              Fill in your team details, choose the organization, and add up to
+              three players. Player 1 is saved as the team leader.
+            </p>
+          </div>
+        </header>
+
+        <TeamRegistrationForm />
+      </main>
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/register" element={<RegistrationPage />} />
+    </Routes>
   )
 }
 
