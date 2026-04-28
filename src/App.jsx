@@ -4,6 +4,7 @@ import heroBackgroundVideo from './assets/vidBackground.mp4'
 import sponsor1Image from './assets/sponsor1.jpeg'
 import sponsor2Image from './assets/sponsor2.png'
 import TeamRegistrationForm from './components/TeamRegistrationForm'
+import { supabase } from './lib/supabase'
 import {
   FiArrowRight,
   FiCalendar,
@@ -456,7 +457,7 @@ function RegistrationPage() {
           </div>
         </header>
 
-        <TeamRegistrationForm />
+        <TeamRegistrationForm supabase={supabase} />
       </main>
     </div>
   )
