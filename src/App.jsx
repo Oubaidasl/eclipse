@@ -1,4 +1,7 @@
 import { useMemo, useState } from 'react'
+import heroBackgroundVideo from './assets/vidBackground.mp4'
+import sponsor1Image from './assets/sponsor1.jpeg'
+import sponsor2Image from './assets/sponsor2.png'
 import {
   FiArrowRight,
   FiCalendar,
@@ -63,6 +66,20 @@ const statCards = [
   { label: 'Prize Pool', value: 'TBA' },
 ]
 
+const sponsors = [
+  {
+    name: 'Sponsor 1',
+    type: 'image',
+    src: sponsor1Image,
+  },
+  {
+    name: 'Sponsor 2',
+    type: 'image',
+    src: sponsor2Image,
+    className: 'is-rotated',
+  },
+]
+
 const faqItems = [
   {
     question: 'Who is this event for?',
@@ -114,30 +131,9 @@ function App() {
 
   return (
     <div className="page-shell">
-      <header className="site-header">
-        <div className="brand-lockup">
-          <img
-            src="/cg-logo.jpeg"
-            alt="Cyber Guardians logo"
-            className="brand-logo"
-          />
-          <div>
-            <p className="eyebrow">Cyber Guardians</p>
-            <h1 className="brand-title">CYBER GUARDIANS</h1>
-          </div>
-        </div>
-
-        <nav className="site-nav" aria-label="Primary">
-          <a href="#about">About</a>
-          <a href="#agenda">Agenda</a>
-          <a href="#ctf">CTF</a>
-          <a href="#faq">FAQ</a>
-        </nav>
-      </header>
-
       <main>
         <section className="hero-section">
-          <div className="hero-video-stage" aria-hidden="true">
+          <div className="hero-video-stage">
             <div className="hero-background">
               <video
                 className="hero-background-video"
@@ -145,9 +141,32 @@ function App() {
                 muted
                 loop
                 playsInline
-              />
+              >
+                <source src={heroBackgroundVideo} type="video/mp4" />
+              </video>
               <div className="hero-background-overlay" />
             </div>
+
+            <header className="site-header hero-header">
+              <div className="brand-lockup">
+                <img
+                  src="/cg-logo.jpeg"
+                  alt="Cyber Guardians logo"
+                  className="brand-logo"
+                />
+                <div>
+                  <p className="eyebrow">Cyber Guardians</p>
+                  <h1 className="brand-title">CYBER GUARDIANS</h1>
+                </div>
+              </div>
+
+              <nav className="site-nav" aria-label="Primary">
+                <a href="#about">About</a>
+                <a href="#agenda">Agenda</a>
+                <a href="#ctf">CTF</a>
+                <a href="#faq">FAQ</a>
+              </nav>
+            </header>
           </div>
 
           <div className="hero-copy">
@@ -189,14 +208,14 @@ function App() {
 
         </section>
 
-        <section className="stats-section">
+        {/* <section className="stats-section">
           {statCards.map((stat) => (
             <article key={stat.label} className="stat-card">
               <span>{stat.label}</span>
               <strong>{stat.value}</strong>
             </article>
           ))}
-        </section>
+        </section> */}
 
         <section id="about" className="content-section two-column-section">
           <div className="section-copy">
@@ -336,7 +355,7 @@ function App() {
           </div>
         </section>
 
-        <section className="content-section">
+        {/* <section className="content-section">
           <div className="section-heading">
             <p className="eyebrow">Recap Gallery</p>
             <h3>Keep these empty until your real visual assets are ready</h3>
@@ -352,22 +371,28 @@ function App() {
               />
             ))}
           </div>
-        </section>
+        </section> */}
 
         <section className="content-section sponsors-section">
           <div className="section-heading">
             <p className="eyebrow">Sponsors & Organizers</p>
-            <h3>Logo rows and team cards, still intentionally blank</h3>
+            <h3>Current sponsors and organizer slots</h3>
           </div>
 
           <div className="sponsor-grid">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <Placeholder
-                key={`sponsor-${index + 1}`}
-                icon={FiShield}
-                label={placeholderText.sponsor}
-                detail={`Tier slot ${index + 1}`}
-              />
+            {sponsors.map((sponsor) => (
+              <article key={sponsor.name} className="sponsor-card">
+                <div className="sponsor-media">
+                  <img
+                    src={sponsor.src}
+                    alt={sponsor.name}
+                    className={`sponsor-image ${sponsor.className ?? ''}`.trim()}
+                  />
+                </div>
+                <div className="sponsor-copy">
+                  <h4>{sponsor.name}</h4>
+                </div>
+              </article>
             ))}
           </div>
 
