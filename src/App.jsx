@@ -20,51 +20,44 @@ const eventDays = [
   {
     id: 'day-1',
     label: 'Day 1',
-    date: 'Dec 3',
-    focus: 'Opening ceremony, keynotes, and community check-in.',
+    date: '09 May 2026',
+    focus: 'Opening day with keynote, conference sessions, workshops, and the CTF briefing.',
     items: [
-      { time: '10:00', title: 'Check-in Window', meta: 'Main Gate' },
-      { time: '15:00', title: 'Opening Ceremony', meta: 'Main Auditorium' },
-      { time: '17:30', title: 'Industry Keynote', meta: 'Stage A' },
+      { time: '08:30', title: 'Accueil & Check-in', meta: 'Arrival window' },
+      { time: '09:30', title: 'Opening Keynote', meta: 'Main stage' },
+      { time: '11:00 - 15:00', title: 'Conference Start to End', meta: 'Conference sessions' },
+      { time: '16:00', title: 'Hands-on Workshops', meta: 'Workshop block' },
+      { time: '18:00', title: 'Briefing CTF & Ending', meta: 'Day 1 close' },
     ],
   },
   {
     id: 'day-2',
     label: 'Day 2',
-    date: 'Dec 4',
-    focus: 'Talk tracks, workshops, and challenge briefings.',
+    date: '10 May 2026',
+    focus: 'Competition day with the live CTF, closing ceremony, awards, and event wrap-up.',
     items: [
-      { time: '09:30', title: 'Workshop Block', meta: 'Labs Wing' },
-      { time: '13:00', title: 'Speaker Sessions', meta: 'Stage A' },
-      { time: '18:00', title: 'CTF Warm-up', meta: 'Arena Floor' },
-    ],
-  },
-  {
-    id: 'day-3',
-    label: 'Day 3',
-    date: 'Dec 5',
-    focus: 'Main competition day with live scoring and team pushes.',
-    items: [
-      { time: '09:00', title: 'CTF Finals Start', meta: 'Arena Floor' },
-      { time: '14:00', title: 'Mentor Office Hours', meta: 'Support Room' },
-      { time: '20:00', title: 'Night Recap', meta: 'Community Lounge' },
+      { time: '09:30', title: 'CTF & Rules', meta: 'Competition briefing' },
+      { time: '10:30 - 16:30', title: 'CTF Starting and Ending', meta: 'Live competition window' },
+      { time: '17:00', title: 'Closing Ceremony', meta: 'Main stage' },
+      { time: '18:00', title: 'Awards Ceremony', meta: 'Recognition and prizes' },
+      { time: '19:00', title: 'The End!', meta: 'Event close' },
     ],
   },
 ]
 
-const speakerSlots = [
-  'Keynote Speaker Slot',
-  'Offensive Security Speaker Slot',
-  'Blue Team Speaker Slot',
-  'Builder / Career Speaker Slot',
-]
+// const speakerSlots = [
+//   'Keynote Speaker Slot',
+//   'Offensive Security Speaker Slot',
+//   'Blue Team Speaker Slot',
+//   'Builder / Career Speaker Slot',
+// ]
 
-const statCards = [
-  { label: 'Attendees', value: '250+' },
-  { label: 'Qualified Teams', value: '32' },
-  { label: 'Challenge Tracks', value: '8' },
-  { label: 'Prize Pool', value: 'TBA' },
-]
+// const statCards = [
+//   { label: 'Attendees', value: '250+' },
+//   { label: 'Qualified Teams', value: '32' },
+//   { label: 'Challenge Tracks', value: '8' },
+//   { label: 'Prize Pool', value: 'TBA' },
+// ]
 
 const sponsors = [
   {
@@ -183,11 +176,11 @@ function App() {
             <div className="hero-meta">
               <div>
                 <FiCalendar />
-                <span>December 2026</span>
+                <span>MAY 2026</span>
               </div>
               <div>
                 <FiMapPin />
-                <span>Venue Placeholder</span>
+                <span>ENSA tetouan</span>
               </div>
               <div>
                 <FiUsers />
@@ -252,7 +245,7 @@ function App() {
           </div>
         </section>
 
-        <section className="content-section">
+        {/* <section className="content-section">
           <div className="section-heading">
             <p className="eyebrow">Speakers</p>
             <h3>Speaker cards with empty media slots</h3>
@@ -274,7 +267,7 @@ function App() {
               </article>
             ))}
           </div>
-        </section>
+        </section> */}
 
         <section id="agenda" className="content-section agenda-section">
           <div className="section-heading">
@@ -396,7 +389,7 @@ function App() {
             ))}
           </div>
 
-          <div className="organizer-grid">
+          {/* <div className="organizer-grid">
             {Array.from({ length: 3 }).map((_, index) => (
               <article key={`organizer-${index + 1}`} className="speaker-card">
                 <Placeholder
@@ -411,7 +404,7 @@ function App() {
                 </div>
               </article>
             ))}
-          </div>
+          </div> */}
         </section>
 
         <section id="faq" className="content-section faq-section">
