@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 import heroBackgroundVideo from './assets/vidBackground.mp4'
+import raulMesaImage from './assets/pics/Screenshot 2026-05-05 153602.png'
 import sponsor1Image from './assets/sponsor1.jpeg'
 import sponsor2Image from './assets/sponsor2.png'
 import TeamRegistrationForm from './components/TeamRegistrationForm'
@@ -45,12 +46,93 @@ const eventDays = [
   },
 ]
 
-// const speakerSlots = [
-//   'Keynote Speaker Slot',
-//   'Offensive Security Speaker Slot',
-//   'Blue Team Speaker Slot',
-//   'Builder / Career Speaker Slot',
-// ]
+const speakers = [
+  {
+    name: 'Rida Lkhluf',
+    role: 'Dr. en ciberseguridad y CEO Cybercrin',
+    organization: 'Cybercrin, Universidad de Malaga',
+  },
+  {
+    name: 'Kamal Reklaui',
+    role: 'Director de ENSA',
+    organization: 'Abdelmalek Essaadi',
+  },
+  {
+    name: 'Hamid Aboulas',
+    role: 'Catedratico en derecho',
+    organization: 'Abdelmalek Essaadi',
+  },
+  {
+    name: 'Bruno Fernandez',
+    role: 'Director general',
+    organization: 'Asac comunicaciones',
+  },
+  {
+    name: 'Enrique Rando',
+    role: 'Consejero tecnico',
+    organization: 'Junta de Andalucia',
+  },
+  {
+    name: 'Raul Mesa',
+    role: 'Jefe de area',
+    organization: 'Oca Global',
+    image: raulMesaImage,
+    featured: true,
+  },
+  {
+    name: 'Antonio Gil',
+    role: 'Director general',
+    organization: 'Softcom',
+  },
+  {
+    name: 'Conchi Gordon',
+    role: 'Jefa de proyectos',
+    organization: 'Hispasec',
+  },
+  {
+    name: 'Francisco Gonzalez',
+    role: 'Director de departamento de tecnologia electronica y telecomunicaciones',
+    organization: 'Universidad de Malaga',
+  },
+  {
+    name: 'Watara Lamine',
+    role: 'Ambassadeur',
+    organization: "Cote d'Ivoire",
+  },
+  {
+    name: 'Mamado Colibali',
+    role: 'Ambassadeur',
+    organization: 'Burkina Faso',
+  },
+  {
+    name: 'Yahya Mohamed Lyassa',
+    role: 'Ambassadeur',
+    organization: 'Iles Comore',
+  },
+  {
+    name: 'Al Aroui Ahmed',
+    role: 'Director general',
+    organization: 'SDK',
+  },
+]
+
+const prizeTiers = [
+  {
+    place: '1st Place',
+    amount: 'TBA',
+    detail: 'Main event champion reward',
+  },
+  {
+    place: '2nd Place',
+    amount: 'TBA',
+    detail: 'Runner-up team reward',
+  },
+  {
+    place: '3rd Place',
+    amount: 'TBA',
+    detail: 'Podium team reward',
+  },
+]
 
 // const statCards = [
 //   { label: 'Attendees', value: '250+' },
@@ -67,6 +149,20 @@ const sponsors = [
   },
   {
     name: 'Sponsor 2',
+    type: 'image',
+    src: sponsor2Image,
+    className: 'is-rotated',
+  },
+]
+
+const partners = [
+  {
+    name: 'Partner 1',
+    type: 'image',
+    src: sponsor1Image,
+  },
+  {
+    name: 'Partner 2',
     type: 'image',
     src: sponsor2Image,
     className: 'is-rotated',
@@ -95,6 +191,17 @@ const faqItems = [
       'Use this FAQ section for venue access, accommodation, food, gear requirements, and attendee support.',
   },
 ]
+
+function SpeakerInitials({ name }) {
+  const initials = name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? '')
+    .join('')
+
+  return <div className="speaker-avatar" aria-hidden="true">{initials}</div>
+}
 
 function LandingPage() {
   const [selectedDay, setSelectedDay] = useState(eventDays[0].id)
@@ -228,29 +335,36 @@ function LandingPage() {
           </div>
         </section>
 
-        {/* <section className="content-section">
+        <section className="content-section">
           <div className="section-heading">
             <p className="eyebrow">Speakers</p>
-            <h3>Speaker cards with empty media slots</h3>
+            <h3>Forum speakers and invited figures</h3>
           </div>
 
           <div className="speaker-grid">
-            {speakerSlots.map((slot) => (
-              <article key={slot} className="speaker-card">
-                <Placeholder
-                  icon={FiMic}
-                  label={placeholderText.speaker}
-                  detail="1:1 card asset area"
-                />
+            {speakers.map((speaker) => (
+              <article
+                key={speaker.name}
+                className={speaker.featured ? 'speaker-card speaker-card-featured' : 'speaker-card'}
+              >
+                {speaker.image ? (
+                  <img
+                    src={speaker.image}
+                    alt={speaker.name}
+                    className={speaker.featured ? 'speaker-photo speaker-photo-featured' : 'speaker-photo'}
+                  />
+                ) : (
+                  <SpeakerInitials name={speaker.name} />
+                )}
                 <div className="speaker-copy">
-                  <h4>{slot}</h4>
-                  <p>Role / title placeholder</p>
-                  <span>Talk title placeholder</span>
+                  <h4>{speaker.name}</h4>
+                  <p>{speaker.role}</p>
+                  <span>{speaker.organization}</span>
                 </div>
               </article>
             ))}
           </div>
-        </section> */}
+        </section>
 
         <section id="agenda" className="content-section agenda-section">
           <div className="section-heading">
@@ -331,6 +445,23 @@ function LandingPage() {
           </div>
         </section>
 
+        <section className="content-section">
+          <div className="section-heading">
+            <p className="eyebrow">Prizes</p>
+            <h3>Rewards for the top three teams</h3>
+          </div>
+
+          <div className="prize-grid">
+            {prizeTiers.map((prize) => (
+              <article key={prize.place} className="prize-card">
+                <span className="prize-place">{prize.place}</span>
+                <strong className="prize-amount">{prize.amount}</strong>
+                <p className="prize-detail">{prize.detail}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         {/* <section className="content-section">
           <div className="section-heading">
             <p className="eyebrow">Recap Gallery</p>
@@ -352,7 +483,7 @@ function LandingPage() {
         <section className="content-section sponsors-section">
           <div className="section-heading">
             <p className="eyebrow">Sponsors & Organizers</p>
-            <h3>Current sponsors and organizer slots</h3>
+            <h3>Current sponsors</h3>
           </div>
 
           <div className="sponsor-grid">
@@ -388,6 +519,30 @@ function LandingPage() {
               </article>
             ))}
           </div> */}
+        </section>
+
+        <section className="content-section partners-section">
+          <div className="section-heading">
+            <p className="eyebrow">Partners</p>
+            <h3>Current partners</h3>
+          </div>
+
+          <div className="partner-grid">
+            {partners.map((partner) => (
+              <article key={partner.name} className="sponsor-card">
+                <div className="sponsor-media">
+                  <img
+                    src={partner.src}
+                    alt={partner.name}
+                    className={`sponsor-image ${partner.className ?? ''}`.trim()}
+                  />
+                </div>
+                <div className="sponsor-copy">
+                  <h4>{partner.name}</h4>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section id="faq" className="content-section faq-section">
