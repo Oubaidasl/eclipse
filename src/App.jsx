@@ -22,7 +22,7 @@ const eventDays = [
   {
     id: 'day-1',
     label: 'Day 1',
-    date: '09 May 2026',
+    date: '15 May 2026',
     focus: 'Opening day with keynote, conference sessions, workshops, and the CTF briefing.',
     items: [
       { time: '08:30', title: 'Accueil & Check-in', meta: 'Arrival window' },
@@ -35,7 +35,7 @@ const eventDays = [
   {
     id: 'day-2',
     label: 'Day 2',
-    date: '10 May 2026',
+    date: '16 May 2026',
     focus: 'Competition day with the live CTF, closing ceremony, awards, and event wrap-up.',
     items: [
       { time: '09:30', title: 'CTF & Rules', meta: 'Competition briefing' },
@@ -144,12 +144,12 @@ const prizeTiers = [
 
 const sponsors = [
   {
-    name: 'Sponsor 1',
+    name: 'NetSecIT',
     type: 'image',
     src: sponsor1Image,
   },
   {
-    name: 'Sponsor 2',
+    name: 'Union Change',
     type: 'image',
     src: sponsor2Image,
     className: 'is-rotated',
@@ -239,7 +239,7 @@ function LandingPage() {
                   className="brand-logo"
                 />
                 <div>
-                  <p className="eyebrow">Cyber Guardians</p>
+                  <p className="eyebrow">North Hacking Day Version 2</p>
                   <h1 className="brand-title">Eclipse</h1>
                 </div>
               </div>
@@ -247,13 +247,13 @@ function LandingPage() {
               <nav className="site-nav" aria-label="Primary">
                 <a href="#about">About</a>
                 <a href="#agenda">Agenda</a>
-                <a href="#ctf">CTF</a>
+                <a href="#rewards">Prizes</a>
                 <a href="#faq">FAQ</a>
               </nav>
             </header>
           </div>
 
-          <div className="hero-copy">
+          {/* <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">Annual Cybersecurity Experience</p>
             <h2>
               A neon-dark event site built for your community, talks, and CTF.
@@ -273,24 +273,22 @@ function LandingPage() {
                 <FiMapPin />
                 <span>ENSA tetouan</span>
               </div>
-              <div>
-                <FiUsers />
-                <span>Registration CTA Ready</span>
-              </div>
             </div>
 
             <div className="hero-actions">
               <Link to="/register" className="primary-action">
-                Register Interest
+                Register Your Team
                 <FiArrowRight />
               </Link>
               <a href="#agenda" className="secondary-action">
                 Explore Program
               </a>
             </div>
-          </div>
+          </div> */}
 
         </section>
+
+        
 
         {/* <section className="stats-section">
           {statCards.map((stat) => (
@@ -302,7 +300,7 @@ function LandingPage() {
         </section> */}
 
         <section id="about" className="content-section two-column-section">
-          <div className="section-copy">
+          {/* <div className="section-copy">
             <p className="eyebrow">About The Event</p>
             <h3>Same energy as the reference, but tuned to your logo.</h3>
             <p>
@@ -333,158 +331,47 @@ function LandingPage() {
               <h4>Community Reach</h4>
               <p>Use this for schools, teams, partners, and ecosystem notes.</p>
             </article>
-          </div>
-        </section>
+          </div> */}
 
-        <section className="content-section">
-          <div className="section-heading">
-            <p className="eyebrow">Speakers</p>
-            <h3>Forum speakers and invited figures</h3>
-          </div>
-
-          <div className="speaker-grid">
-            {speakers.map((speaker) => (
-              <article
-                key={speaker.name}
-                className={speaker.featured ? 'speaker-card speaker-card-featured' : 'speaker-card'}
-              >
-                {speaker.image ? (
-                  <img
-                    src={speaker.image}
-                    alt={speaker.name}
-                    className={speaker.featured ? 'speaker-photo speaker-photo-featured' : 'speaker-photo'}
-                  />
-                ) : (
-                  <SpeakerInitials name={speaker.name} />
-                )}
-                <div className="speaker-copy">
-                  <h4>{speaker.name}</h4>
-                  <p>{speaker.role}</p>
-                  <span>{speaker.organization}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="agenda" className="content-section agenda-section">
-          <div className="section-heading">
-            <p className="eyebrow">Agenda</p>
-            <h3>Multi-day program with tab-style day switching</h3>
-          </div>
-
-          <div className="day-tabs" role="tablist" aria-label="Event days">
-            {eventDays.map((day) => (
-              <button
-                key={day.id}
-                type="button"
-                className={day.id === activeDay.id ? 'day-tab active' : 'day-tab'}
-                onClick={() => setSelectedDay(day.id)}
-              >
-                <span>{day.label}</span>
-                <small>{day.date}</small>
-              </button>
-            ))}
-          </div>
-
-          <div className="agenda-panel">
-            <div className="agenda-intro">
-              <h4>{activeDay.label}</h4>
-              <p>{activeDay.focus}</p>
-            </div>
-
-            <div className="timeline-list">
-              {activeDay.items.map((item) => (
-                <article key={`${activeDay.id}-${item.time}-${item.title}`} className="timeline-item">
-                  <div className="timeline-time">
-                    <FiClock />
-                    <span>{item.time}</span>
-                  </div>
-                  <div>
-                    <h5>{item.title}</h5>
-                    <p>{item.meta}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="ctf" className="content-section two-column-section">
-          <div className="section-copy">
-            <p className="eyebrow">CTF Experience</p>
-            <h3>Space for your challenge tracks, scoring model, and finals.</h3>
-            <p>
-              The layout below is already shaped for a public overview section
-              similar to the live site you shared: challenge categories, format,
-              stats, and a CTA that can later point at your platform or form.
+          <div className="hero-copy">
+            <p className="eyebrow hero-eyebrow">Annual Cybersecurity Experience</p>
+            <h2>
+              A neon-dark event site built for your community, talks, and CTF.
+            </h2>
+            <p className="hero-description">
+              This layout mirrors the structure of the reference site while
+              keeping the media slots intentionally empty so you can drop in
+              your own video, speaker images, gallery assets, and sponsor logos.
             </p>
-          </div>
 
-          <div className="ctf-panel">
-            <div className="mini-stat-grid">
-              <article>
-                <strong>Web</strong>
-                <span>Track Placeholder</span>
-              </article>
-              <article>
-                <strong>Pwn</strong>
-                <span>Track Placeholder</span>
-              </article>
-              <article>
-                <strong>Forensics</strong>
-                <span>Track Placeholder</span>
-              </article>
-              <article>
-                <strong>Crypto</strong>
-                <span>Track Placeholder</span>
-              </article>
+            <div className="hero-meta">
+              <div>
+                <FiCalendar />
+                <span>MAY 2026</span>
+              </div>
+              <div>
+                <FiMapPin />
+                <span>ENSA tetouan</span>
+              </div>
             </div>
-            <Link to="/register" className="secondary-action inline-action">
-              Add CTF Signup Link Later
-            </Link>
+
+            <div className="hero-actions">
+              <Link to="/register" className="primary-action">
+                Register Your Team
+                <FiArrowRight />
+              </Link>
+              <a href="#agenda" className="secondary-action">
+                Explore Program
+              </a>
+            </div>
           </div>
+
         </section>
-
-        <section className="content-section">
-          <div className="section-heading">
-            <p className="eyebrow">Prizes</p>
-            <h3>Rewards for the top three teams</h3>
-          </div>
-
-          <div className="prize-grid">
-            {prizeTiers.map((prize) => (
-              <article key={prize.place} className="prize-card">
-                <span className="prize-place">{prize.place}</span>
-                <strong className="prize-amount">{prize.amount}</strong>
-                <p className="prize-detail">{prize.detail}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* <section className="content-section">
-          <div className="section-heading">
-            <p className="eyebrow">Recap Gallery</p>
-            <h3>Keep these empty until your real visual assets are ready</h3>
-          </div>
-
-          <div className="gallery-grid">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <Placeholder
-                key={`gallery-${index + 1}`}
-                icon={FiVideo}
-                label={placeholderText.gallery}
-                detail={`Slot ${index + 1}`}
-              />
-            ))}
-          </div>
-        </section> */}
 
         <section className="content-section sponsors-section">
           <div className="section-heading">
-            <p className="eyebrow">Sponsors & Organizers</p>
-            <h3>Current sponsors</h3>
+            <p className="eyebrow">Sponsors</p>
+            <h3>Our sponsors</h3>
           </div>
 
           <div className="sponsor-grid">
@@ -525,7 +412,7 @@ function LandingPage() {
         <section className="content-section partners-section">
           <div className="section-heading">
             <p className="eyebrow">Partners</p>
-            <h3>Current partners</h3>
+            <h3>Our partners</h3>
           </div>
 
           <div className="partner-grid">
@@ -545,6 +432,153 @@ function LandingPage() {
             ))}
           </div>
         </section>
+
+        <section className="content-section">
+          <div className="section-heading">
+            <p className="eyebrow">Speakers</p>
+            <h3>Explore Our lineup of industry experts</h3>
+          </div>
+
+          <div className="speaker-grid">
+            {speakers.map((speaker) => (
+              <article
+                key={speaker.name}
+                className={speaker.featured ? 'speaker-card speaker-card-featured' : 'speaker-card'}
+              >
+                {speaker.image ? (
+                  <img
+                    src={speaker.image}
+                    alt={speaker.name}
+                    className={speaker.featured ? 'speaker-photo speaker-photo-featured' : 'speaker-photo'}
+                  />
+                ) : (
+                  <SpeakerInitials name={speaker.name} />
+                )}
+                <div className="speaker-copy">
+                  <h4>{speaker.name}</h4>
+                  <p>{speaker.role}</p>
+                  <span>{speaker.organization}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="agenda" className="content-section agenda-section">
+          <div className="section-heading">
+            <p className="eyebrow">Agenda</p>
+            <h3>Explore Our Event Schedule</h3>
+          </div>
+
+          <div className="day-tabs" role="tablist" aria-label="Event days">
+            {eventDays.map((day) => (
+              <button
+                key={day.id}
+                type="button"
+                className={day.id === activeDay.id ? 'day-tab active' : 'day-tab'}
+                onClick={() => setSelectedDay(day.id)}
+              >
+                <span>{day.label}</span>
+                <small>{day.date}</small>
+              </button>
+            ))}
+          </div>
+
+          <div className="agenda-panel">
+            <div className="agenda-intro">
+              <h4>{activeDay.label}</h4>
+              <p>{activeDay.focus}</p>
+            </div>
+
+            <div className="timeline-list">
+              {activeDay.items.map((item) => (
+                <article key={`${activeDay.id}-${item.time}-${item.title}`} className="timeline-item">
+                  <div className="timeline-time">
+                    <FiClock />
+                    <span>{item.time}</span>
+                  </div>
+                  <div>
+                    <h5>{item.title}</h5>
+                    <p>{item.meta}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* <section id="ctf" className="content-section two-column-section">
+          <div className="section-copy">
+            <p className="eyebrow">CTF Experience</p>
+            <h3>Space for your challenge tracks, scoring model, and finals.</h3>
+            <p>
+              The layout below is already shaped for a public overview section
+              similar to the live site you shared: challenge categories, format,
+              stats, and a CTA that can later point at your platform or form.
+            </p>
+          </div>
+
+          <div className="ctf-panel">
+            <div className="mini-stat-grid">
+              <article>
+                <strong>Web</strong>
+                <span>Track Placeholder</span>
+              </article>
+              <article>
+                <strong>Pwn</strong>
+                <span>Track Placeholder</span>
+              </article>
+              <article>
+                <strong>Forensics</strong>
+                <span>Track Placeholder</span>
+              </article>
+              <article>
+                <strong>Crypto</strong>
+                <span>Track Placeholder</span>
+              </article>
+            </div>
+            <Link to="/register" className="secondary-action inline-action">
+              Add CTF Signup Link Later
+            </Link>
+          </div>
+        </section> */}
+
+        <section id='rewards' className="content-section">
+          <div className="section-heading">
+            <p className="eyebrow">Prizes</p>
+            <h3>Rewards for the top three teams</h3>
+          </div>
+
+          <div className="prize-grid">
+            {prizeTiers.map((prize) => (
+              <article key={prize.place} className="prize-card">
+                <span className="prize-place">{prize.place}</span>
+                <strong className="prize-amount">{prize.amount}</strong>
+                <p className="prize-detail">{prize.detail}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* <section className="content-section">
+          <div className="section-heading">
+            <p className="eyebrow">Recap Gallery</p>
+            <h3>Keep these empty until your real visual assets are ready</h3>
+          </div>
+
+          <div className="gallery-grid">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <Placeholder
+                key={`gallery-${index + 1}`}
+                icon={FiVideo}
+                label={placeholderText.gallery}
+                detail={`Slot ${index + 1}`}
+              />
+            ))}
+          </div>
+        </section> */}
+
+        
 
         <section id="faq" className="content-section faq-section">
           <div className="section-heading">
@@ -578,11 +612,11 @@ function LandingPage() {
 
         <section id="register" className="content-section cta-section">
           <p className="eyebrow">Registration</p>
-          <h3>The main CTA now opens a dedicated registration page for teams.</h3>
-          <p>
+          <h3>Ready to Compete? Register your team now</h3>
+          {/* <p>
             Team name, organization, and player details are collected on a
             separate screen and submitted through the `register_team` RPC.
-          </p>
+          </p> */}
           <Link to="/register" className="primary-action">
             Open Team Registration
             <FiArrowRight />
@@ -604,7 +638,7 @@ function RegistrationPage() {
           </Link>
           <div className="registration-page-copy">
             <p className="eyebrow">Team Registration</p>
-            <h1>Register your Cyber Guardians team</h1>
+            <h1>Register your team</h1>
             <p>
               Fill in your team details, choose the organization, and add up to
               three players. Player 1 is saved as the team leader.
