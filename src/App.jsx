@@ -3,6 +3,7 @@ import { Link, Route, Routes } from 'react-router-dom'
 import heroBackgroundVideo from './assets/vidBackground.mp4'
 import raulMesaImage from './assets/pics/Screenshot 2026-05-05 153602.png'
 import sponsor1Image from './assets/sponsor1.jpeg'
+import xlinx from './assets/xlinx.jpeg'
 import sponsor2Image from './assets/sponsor2.png'
 import sponsor3Image from './assets/CMO logo.jpg'
 import cybercin from './assets/cybercin.jpeg'
@@ -160,10 +161,15 @@ const sponsors = [
     type: 'image',
     src: sponsor1Image,
   },
+  // {
+  //   name: 'Club Marketing Oujda',
+  //   type: 'image',
+  //   src: sponsor3Image,
+  // },
   {
-    name: 'Club Marketing Oujda',
+    name: 'XLinx',
     type: 'image',
-    src: sponsor3Image,
+    src: xlinx,
   },
 ]
 
