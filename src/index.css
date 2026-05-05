@@ -442,12 +442,70 @@ select {
   min-height: 15rem;
 }
 
+.speaker-card {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.speaker-card-featured {
+  padding: 0;
+  overflow: hidden;
+}
+
+.speaker-avatar {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  aspect-ratio: 1;
+  border: 1px solid rgba(121, 255, 112, 0.42);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at top, rgba(85, 255, 90, 0.18), transparent 55%),
+    linear-gradient(180deg, rgba(5, 8, 5, 0.82), rgba(7, 16, 7, 0.92));
+  color: #efffef;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08rem;
+  box-shadow:
+    0 0 0 1px rgba(93, 255, 117, 0.06) inset,
+    0 12px 28px rgba(0, 0, 0, 0.24);
+}
+
+.speaker-photo {
+  width: 4.5rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid rgba(121, 255, 112, 0.42);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px rgba(93, 255, 117, 0.06) inset,
+    0 12px 28px rgba(0, 0, 0, 0.24);
+}
+
+.speaker-photo-featured {
+  width: 100%;
+  height: 18rem;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 .speaker-copy {
   padding-top: 1rem;
 }
 
+.speaker-card-featured .speaker-copy {
+  padding: 0 1rem 1rem;
+}
+
 .speaker-copy p {
   color: #79ff73;
+}
+
+.speaker-copy span {
+  display: block;
+  margin-top: 0.55rem;
 }
 
 .agenda-section {
@@ -548,12 +606,53 @@ select {
   font-family: "Segoe UI", sans-serif;
 }
 
+.prize-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.prize-card {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1.35rem;
+  border: 1px solid rgba(105, 255, 110, 0.18);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at top, rgba(111, 255, 120, 0.12), transparent 45%),
+    linear-gradient(180deg, rgba(10, 18, 10, 0.92), rgba(5, 11, 5, 0.82));
+  box-shadow:
+    0 0 0 1px rgba(93, 255, 117, 0.06) inset,
+    0 24px 60px rgba(0, 0, 0, 0.34);
+}
+
+.prize-place {
+  color: #82ff7a;
+  font-size: 0.84rem;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+}
+
+.prize-amount {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #efffef;
+  line-height: 1;
+}
+
+.prize-detail {
+  margin: 0;
+  color: #b8c7b8;
+  font-family: "Segoe UI", sans-serif;
+  line-height: 1.7;
+}
+
 .inline-action {
   margin-top: 1rem;
 }
 
 .gallery-grid,
-.sponsor-grid {
+.sponsor-grid,
+.partner-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
@@ -564,6 +663,10 @@ select {
 }
 
 .sponsor-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.partner-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -904,6 +1007,7 @@ select {
   .speaker-grid,
   .gallery-grid,
   .sponsor-grid,
+  .partner-grid,
   .organizer-grid,
   .stats-section {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -962,6 +1066,8 @@ select {
   .organizer-grid,
   .gallery-grid,
   .sponsor-grid,
+  .partner-grid,
+  .prize-grid,
   .mini-stat-grid,
   .timeline-item {
     grid-template-columns: 1fr;
