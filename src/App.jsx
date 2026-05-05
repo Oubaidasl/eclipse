@@ -4,6 +4,12 @@ import heroBackgroundVideo from './assets/vidBackground.mp4'
 import raulMesaImage from './assets/pics/Screenshot 2026-05-05 153602.png'
 import sponsor1Image from './assets/sponsor1.jpeg'
 import sponsor2Image from './assets/sponsor2.png'
+import sponsor3Image from './assets/CMO logo.jpg'
+import cybercin from './assets/cybercin.jpeg'
+import oca from './assets/oca.jpeg'
+import malaga from './assets/malaga.jpeg'
+import softcom from './assets/softcom.jpeg'
+import c from './assets/c.jpg'
 import TeamRegistrationForm from './components/TeamRegistrationForm'
 import { supabase } from './lib/supabase'
 import {
@@ -144,28 +150,51 @@ const prizeTiers = [
 
 const sponsors = [
   {
-    name: 'NetSecIT',
-    type: 'image',
-    src: sponsor1Image,
-  },
-  {
     name: 'Union Change',
     type: 'image',
     src: sponsor2Image,
     className: 'is-rotated',
   },
-]
-
-const partners = [
   {
-    name: 'Partner 1',
+    name: 'NetSecIT',
     type: 'image',
     src: sponsor1Image,
   },
   {
-    name: 'Partner 2',
+    name: 'Club Marketing Oujda',
     type: 'image',
-    src: sponsor2Image,
+    src: sponsor3Image,
+  },
+]
+
+const partners = [
+  {
+    name: 'CyberCrin',
+    type: 'image',
+    src: cybercin,
+  },
+  {
+    name: 'OCA Global',
+    type: 'image',
+    src: oca,
+    className: 'is-rotated',
+  },
+  {
+    name: 'Uiversidad de Malaga',
+    type: 'image',
+    src: malaga,
+    className: 'is-rotated',
+  },
+  {
+    name: 'Softcom',
+    type: 'image',
+    src: softcom,
+    className: 'is-rotated',
+  },
+  {
+    name: 'C',
+    type: 'image',
+    src: c,
     className: 'is-rotated',
   },
 ]
@@ -174,22 +203,17 @@ const faqItems = [
   {
     question: 'Who is this event for?',
     answer:
-      'Students, builders, and security enthusiasts. Keep the copy if that still fits, or replace it with your actual audience later.',
+      'Students, builders, and security enthusiasts. Ask your self, are you interested in cybersecurity? Do you want to learn, compete, and connect with others in the field? Then this event is for you.',
   },
   {
     question: 'Will there be a live CTF?',
     answer:
-      'Yes. This section is wired as a placeholder for your real event details, formats, and timelines.',
+      'Yes. There will be a qualification round at 10 may, online, and the final will be held in person at 16 may.',
   },
   {
     question: 'Can I join as a solo player or team?',
     answer:
-      'This answer block is ready for your final rule set, team size, and qualification criteria.',
-  },
-  {
-    question: 'Where do I add logistics and travel info?',
-    answer:
-      'Use this FAQ section for venue access, accommodation, food, gear requirements, and attendee support.',
+      'Yes, just create a team of 1 player.',
   },
 ]
 
@@ -299,7 +323,7 @@ function LandingPage() {
           ))}
         </section> */}
 
-        <section id="about" className="content-section two-column-section">
+        <section id="about" className="content-section two-column-section" >
           {/* <div className="section-copy">
             <p className="eyebrow">About The Event</p>
             <h3>Same energy as the reference, but tuned to your logo.</h3>
