@@ -100,7 +100,13 @@ export default function TeamRegistrationForm({ supabase }) {
         })
         setOrganizations([])
       } else {
-        setOrganizations(data ?? [])
+        setOrganizations(
+          (data ?? []).sort((a, b) => {
+            if (a.name.toLowerCase() === 'others') return 1
+            if (b.name.toLowerCase() === 'others') return -1
+            return 0  // already sorted by Supabase, no need to re-sort the rest
+          })
+        )
       }
 
       setIsLoadingOrganizations(false)
