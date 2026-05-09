@@ -47,6 +47,48 @@ select {
   overflow: hidden;
 }
 
+.site-watermark {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  opacity: 0.16;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.site-watermark-logo {
+  width: 4.75rem;
+  height: 4.75rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(89, 255, 102, 0.18));
+}
+
+.site-watermark-copy {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.site-watermark-copy span,
+.site-watermark-copy strong {
+  color: #dfffe1;
+  line-height: 1.2;
+}
+
+.site-watermark-copy span {
+  font-size: 0.72rem;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+}
+
+.site-watermark-copy strong {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 .page-shell::before {
   content: "";
   position: fixed;
@@ -1044,6 +1086,22 @@ select {
   .registration-header,
   .registration-form {
     padding: 1.2rem;
+  }
+
+  .site-watermark {
+    right: 0.85rem;
+    bottom: 0.85rem;
+    gap: 0.6rem;
+    opacity: 0.12;
+  }
+
+  .site-watermark-logo {
+    width: 3.3rem;
+    height: 3.3rem;
+  }
+
+  .site-watermark-copy strong {
+    font-size: 0.8rem;
   }
 
   .registration-page-shell {

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
+import organizerLogo from './assets/CB-logo.png'
 import heroBackgroundVideo from './assets/vidBackground.mp4'
 import raulMesaImage from './assets/pics/Screenshot 2026-05-05 153602.png'
 import sponsor1Image from './assets/sponsor1.jpeg'
@@ -214,6 +215,17 @@ function LandingPage() {
 
   return (
     <div className="page-shell">
+      <div className="site-watermark" aria-hidden="true">
+        <img
+          src={organizerLogo}
+          alt=""
+          className="site-watermark-logo"
+        />
+        <div className="site-watermark-copy">
+          <span>Organized by:</span>
+          <strong>Club CyberGuardians ENSAte</strong>
+        </div>
+      </div>
       <main>
         <section className="hero-section">
           <div className="hero-video-stage">
@@ -595,6 +607,17 @@ function LandingPage() {
 function RegistrationPage() {
   return (
     <div className="page-shell registration-page-shell">
+      <div className="site-watermark" aria-hidden="true">
+        <img
+          src={organizerLogo}
+          alt=""
+          className="site-watermark-logo"
+        />
+        <div className="site-watermark-copy">
+          <span>Organized by:</span>
+          <strong>Club CyberGuardians ENSAte</strong>
+        </div>
+      </div>
       <main className="registration-page">
         <header className="registration-page-header">
           <Link to="/" className="secondary-action">
