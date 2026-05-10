@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
+import organizerLogo from './assets/CB-logo.png'
 import heroBackgroundVideo from './assets/vidBackground.mp4'
 import raulMesaImage from './assets/pics/Screenshot 2026-05-05 153602.png'
 import sponsor1Image from './assets/sponsor1.jpeg'
@@ -127,17 +128,17 @@ const speakers = [
 const prizeTiers = [
   {
     place: '1st Place',
-    amount: 'TBA',
+    amount: 'To be announced soon',
     detail: 'Main event champion reward',
   },
   {
     place: '2nd Place',
-    amount: 'TBA',
+    amount: 'To be announced soon',
     detail: 'Runner-up team reward',
   },
   {
     place: '3rd Place',
-    amount: 'TBA',
+    amount: 'To be announced soon',
     detail: 'Podium team reward',
   },
 ]
@@ -214,7 +215,7 @@ const faqItems = [
   {
     question: 'Will there be a live CTF?',
     answer:
-      'Yes. There will be a qualification round at 10 may, online, and the final will be held in person at 16 may.',
+      'Yes, it will be held in person at 16 may.',
   },
   {
     question: 'Can I join as a solo player or team?',
@@ -245,6 +246,17 @@ function LandingPage() {
 
   return (
     <div className="page-shell">
+      <div className="site-watermark" aria-hidden="true">
+        <img
+          src={organizerLogo}
+          alt=""
+          className="site-watermark-logo"
+        />
+        <div className="site-watermark-copy">
+          <span>Organized by:</span>
+          <strong>Club CyberGuardians ENSATE</strong>
+        </div>
+      </div>
       <main>
         <section className="hero-section">
           <div className="hero-video-stage">
@@ -275,8 +287,8 @@ function LandingPage() {
               </div>
 
               <nav className="site-nav" aria-label="Primary">
-                <a href="#about">About</a>
-                <a href="#agenda">Agenda</a>
+                {/* <a href="#about">About</a>
+                <a href="#agenda">Agenda</a> */}
                 <a href="#rewards">Prizes</a>
                 <a href="#faq">FAQ</a>
               </nav>
@@ -329,39 +341,7 @@ function LandingPage() {
           ))}
         </section> */}
 
-        <section id="about" className="content-section two-column-section" >
-          {/* <div className="section-copy">
-            <p className="eyebrow">About The Event</p>
-            <h3>Same energy as the reference, but tuned to your logo.</h3>
-            <p>
-              The palette is pulled from your mark: black background, bright
-              radioactive green accents, subtle grid lines, and metallic muted
-              text. The typography leans sharp and technical so the whole thing
-              feels aligned with the bird emblem and cyber aesthetic.
-            </p>
-            <p>
-              This section is ready for your event story, audience description,
-              and positioning without needing structural changes later.
-            </p>
-          </div>
-
-          <div className="info-grid">
-            <article className="info-card">
-              <FiShield />
-              <h4>Talks & Workshops</h4>
-              <p>Use this card for your learning tracks and technical themes.</p>
-            </article>
-            <article className="info-card">
-              <FiTarget />
-              <h4>Competition Focus</h4>
-              <p>Good spot for rules, challenge categories, or qualification.</p>
-            </article>
-            <article className="info-card">
-              <FiGlobe />
-              <h4>Community Reach</h4>
-              <p>Use this for schools, teams, partners, and ecosystem notes.</p>
-            </article>
-          </div> */}
+        {/* <section id="about" className="content-section two-column-section" >
 
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">Annual Cybersecurity Experience</p>
@@ -396,7 +376,7 @@ function LandingPage() {
             </div>
           </div>
 
-        </section>
+        </section> */}
 
         <section className="content-section sponsors-section">
           <div className="section-heading">
@@ -463,7 +443,7 @@ function LandingPage() {
           </div>
         </section>
 
-        <section className="content-section">
+        {/* <section className="content-section">
           <div className="section-heading">
             <p className="eyebrow">Speakers</p>
             <h3>Explore Our lineup of industry experts</h3>
@@ -492,9 +472,9 @@ function LandingPage() {
               </article>
             ))}
           </div>
-        </section>
+        </section> */}
 
-        <section id="agenda" className="content-section agenda-section">
+        {/* <section id="agenda" className="content-section agenda-section">
           <div className="section-heading">
             <p className="eyebrow">Agenda</p>
             <h3>Explore Our Event Schedule</h3>
@@ -535,7 +515,7 @@ function LandingPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* <section id="ctf" className="content-section two-column-section">
           <div className="section-copy">
@@ -590,6 +570,8 @@ function LandingPage() {
           </div>
         </section>
 
+        
+
         {/* <section className="content-section">
           <div className="section-heading">
             <p className="eyebrow">Recap Gallery</p>
@@ -607,6 +589,8 @@ function LandingPage() {
             ))}
           </div>
         </section> */}
+
+        
 
         
 
@@ -660,6 +644,17 @@ function LandingPage() {
 function RegistrationPage() {
   return (
     <div className="page-shell registration-page-shell">
+      <div className="site-watermark" aria-hidden="true">
+        <img
+          src={organizerLogo}
+          alt=""
+          className="site-watermark-logo"
+        />
+        <div className="site-watermark-copy">
+          <span>Organized by:</span>
+          <strong>Club CyberGuardians ENSATE</strong>
+        </div>
+      </div>
       <main className="registration-page">
         <header className="registration-page-header">
           <Link to="/" className="secondary-action">
