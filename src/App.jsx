@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
+import organizerLogo from './assets/CB-logo.png'
 import heroBackgroundVideo from './assets/vidBackground.mp4'
 import antonioImage from './assets/pics/Antonio Gil.png'
 import conchiImage from './assets/pics/Conchi Gordon.png'
@@ -148,17 +149,17 @@ const speakers = [
 const prizeTiers = [
   {
     place: '1st Place',
-    amount: 'TBA',
+    amount: 'To be announced soon',
     detail: 'Main event champion reward',
   },
   {
     place: '2nd Place',
-    amount: 'TBA',
+    amount: 'To be announced soon',
     detail: 'Runner-up team reward',
   },
   {
     place: '3rd Place',
-    amount: 'TBA',
+    amount: 'To be announced soon',
     detail: 'Podium team reward',
   },
 ]
@@ -266,6 +267,17 @@ function LandingPage() {
 
   return (
     <div className="page-shell">
+      <div className="site-watermark" aria-hidden="true">
+        <img
+          src={organizerLogo}
+          alt=""
+          className="site-watermark-logo"
+        />
+        <div className="site-watermark-copy">
+          <span>Organized by:</span>
+          <strong>Club CyberGuardians ENSATE</strong>
+        </div>
+      </div>
       <main>
         <section className="hero-section">
           <div className="hero-video-stage">
@@ -292,8 +304,8 @@ function LandingPage() {
               </div>
 
               <nav className="site-nav" aria-label="Primary">
-                <a href="#about">About</a>
-                <a href="#agenda">Agenda</a>
+                {/* <a href="#about">About</a>
+                <a href="#agenda">Agenda</a> */}
                 <a href="#rewards">Prizes</a>
                 <a href="#faq">FAQ</a>
               </nav>
@@ -411,7 +423,7 @@ function LandingPage() {
             </div>
           </div>
 
-        </section>
+        </section> */}
 
         <section className="content-section sponsors-section">
           <div className="section-heading">
@@ -483,7 +495,7 @@ function LandingPage() {
           </div>
         </section>
 
-        <section className="content-section">
+        {/* <section className="content-section">
           <div className="section-heading">
             <p className="eyebrow">Speakers</p>
             <h3>Explore Our lineup of industry experts</h3>
@@ -512,9 +524,9 @@ function LandingPage() {
               </article>
             ))}
           </div>
-        </section>
+        </section> */}
 
-        <section id="agenda" className="content-section agenda-section">
+        {/* <section id="agenda" className="content-section agenda-section">
           <div className="section-heading">
             <p className="eyebrow">Agenda</p>
             <h3>Explore Our Event Schedule</h3>
@@ -555,7 +567,7 @@ function LandingPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* <section id="ctf" className="content-section two-column-section">
           <div className="section-copy">
@@ -610,6 +622,8 @@ function LandingPage() {
           </div>
         </section>
 
+        
+
         {/* <section className="content-section">
           <div className="section-heading">
             <p className="eyebrow">Recap Gallery</p>
@@ -627,6 +641,8 @@ function LandingPage() {
             ))}
           </div>
         </section> */}
+
+        
 
         
 
@@ -680,6 +696,17 @@ function LandingPage() {
 function RegistrationPage() {
   return (
     <div className="page-shell registration-page-shell">
+      <div className="site-watermark" aria-hidden="true">
+        <img
+          src={organizerLogo}
+          alt=""
+          className="site-watermark-logo"
+        />
+        <div className="site-watermark-copy">
+          <span>Organized by:</span>
+          <strong>Club CyberGuardians ENSATE</strong>
+        </div>
+      </div>
       <main className="registration-page">
         <header className="registration-page-header">
           <Link to="/" className="secondary-action">
