@@ -164,12 +164,12 @@ const prizeTiers = [
   },
 ]
 
-// const statCards = [
-//   { label: 'Attendees', value: '250+' },
-//   { label: 'Qualified Teams', value: '32' },
-//   { label: 'Challenge Tracks', value: '8' },
-//   { label: 'Prize Pool', value: 'TBA' },
-// ]
+const statCards = [
+  { label: 'Attendees', value: '250+' },
+  { label: 'Qualified Teams', value: '32' },
+  { label: 'Challenge Tracks', value: '8' },
+  { label: 'Prize Pool', value: 'TBA' },
+]
 
 const sponsors = [
   {
@@ -311,8 +311,8 @@ function LandingPage() {
               </div>
 
               <nav className="site-nav" aria-label="Primary">
-                {/* <a href="#about">About</a>
-                <a href="#agenda">Agenda</a> */}
+                <a href="#about">About</a>
+                {/* <a href="#agenda">Agenda</a> */}
                 <a href="#rewards">Prizes</a>
                 <a href="#faq">FAQ</a>
               </nav>
