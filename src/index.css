@@ -253,12 +253,14 @@ select {
     0 24px 60px rgba(0, 0, 0, 0.34);
 }
 
-.hero-animated-bg {
+.hero-bg-video {
   position: absolute;
   inset: 0;
-  background: linear-gradient(-45deg, #020402, #041004, #0a250a, #020402);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: saturate(1.15) brightness(0.75);
 }
 
 @keyframes gradientBG {
@@ -270,9 +272,10 @@ select {
 .hero-background-overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
-    linear-gradient(180deg, rgba(2, 4, 2, 0.18), rgba(2, 4, 2, 0.66)),
-    linear-gradient(90deg, rgba(1, 3, 1, 0.12) 0%, rgba(1, 3, 1, 0.28) 100%);
+    linear-gradient(180deg, rgba(2, 8, 2, 0.3) 0%, rgba(4, 10, 4, 0.75) 100%),
+    linear-gradient(90deg, rgba(1, 5, 1, 0.2) 0%, rgba(1, 5, 1, 0.1) 100%);
 }
 
 .hero-center-logo {
@@ -281,14 +284,14 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
 }
 
 .hero-logo-wrapper {
   position: relative;
-  width: 35vw;
-  max-width: 400px;
+  width: 25vw;
+  max-width: 280px;
   aspect-ratio: 1;
   border-radius: 50%;
   display: flex;
@@ -1322,3 +1325,123 @@ select {
     justify-content: stretch;
   }
 }
+
+/* ============================================
+   SCROLL-REVEAL & ENTRANCE ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(110, 232, 106, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(110, 232, 106, 0.7), 0 0 80px rgba(80, 200, 80, 0.3);
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% { box-shadow: 0 0 12px rgba(110, 232, 106, 0.15); }
+  50%       { box-shadow: 0 0 28px rgba(110, 232, 106, 0.35); }
+}
+
+/* Applied to sections / cards automatically on load */
+.content-section {
+  animation: fadeInUp 0.7s ease both;
+}
+
+.hero-copy {
+  animation: fadeInScale 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+.hero-copy h2 {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+.section-heading {
+  animation: fadeInLeft 0.6s ease both;
+}
+
+.speaker-card {
+  animation: fadeInUp 0.6s ease both;
+}
+
+.speaker-card:nth-child(1)  { animation-delay: 0.05s; }
+.speaker-card:nth-child(2)  { animation-delay: 0.10s; }
+.speaker-card:nth-child(3)  { animation-delay: 0.15s; }
+.speaker-card:nth-child(4)  { animation-delay: 0.20s; }
+.speaker-card:nth-child(5)  { animation-delay: 0.25s; }
+.speaker-card:nth-child(6)  { animation-delay: 0.30s; }
+.speaker-card:nth-child(7)  { animation-delay: 0.35s; }
+.speaker-card:nth-child(8)  { animation-delay: 0.40s; }
+.speaker-card:nth-child(9)  { animation-delay: 0.45s; }
+.speaker-card:nth-child(10) { animation-delay: 0.50s; }
+.speaker-card:nth-child(11) { animation-delay: 0.55s; }
+.speaker-card:nth-child(12) { animation-delay: 0.60s; }
+.speaker-card:nth-child(13) { animation-delay: 0.65s; }
+
+.prize-card {
+  animation: fadeInScale 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.prize-card:nth-child(1) { animation-delay: 0.1s; }
+.prize-card:nth-child(2) { animation-delay: 0.22s; }
+.prize-card:nth-child(3) { animation-delay: 0.34s; }
+
+.faq-item {
+  animation: fadeInUp 0.5s ease both;
+}
+.faq-item:nth-child(1) { animation-delay: 0.05s; }
+.faq-item:nth-child(2) { animation-delay: 0.15s; }
+.faq-item:nth-child(3) { animation-delay: 0.25s; }
+
+.timeline-item {
+  animation: fadeInLeft 0.45s ease both;
+}
+.timeline-item:nth-child(1) { animation-delay: 0.05s; }
+.timeline-item:nth-child(2) { animation-delay: 0.12s; }
+.timeline-item:nth-child(3) { animation-delay: 0.19s; }
+.timeline-item:nth-child(4) { animation-delay: 0.26s; }
+.timeline-item:nth-child(5) { animation-delay: 0.33s; }
+
+.agenda-panel,
+.cta-section {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+.day-tab {
+  animation: fadeInUp 0.4s ease both;
+}
+.day-tab:nth-child(1) { animation-delay: 0.05s; }
+.day-tab:nth-child(2) { animation-delay: 0.15s; }

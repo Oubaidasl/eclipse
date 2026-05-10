@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 import organizerLogo from './assets/CB-logo.png'
-import heroBackgroundVideo from './assets/vidBackground.mp4'
+import heroBackgroundVideo from './assets/pics/Hacker_s_Digital_Eclipse_Video_Generation.mp4'
 import antonioImage from './assets/pics/Antonio Gil.png'
 import conchiImage from './assets/pics/Conchi Gordon.png'
 import enriqueImage from './assets/pics/Enrique Rando.png'
@@ -281,7 +281,14 @@ function LandingPage() {
       <main>
         <section className="hero-section">
           <div className="hero-video-stage">
-            <div className="hero-animated-bg" />
+            <video
+              className="hero-bg-video"
+              src={heroBackgroundVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
             <div className="hero-background-overlay" />
             
             <div className="hero-center-logo">
@@ -349,17 +356,17 @@ function LandingPage() {
 
         
 
-        {/* <section className="stats-section">
+        <section className="stats-section">
           {statCards.map((stat) => (
             <article key={stat.label} className="stat-card">
               <span>{stat.label}</span>
               <strong>{stat.value}</strong>
             </article>
           ))}
-        </section> */}
+        </section>
 
         <section id="about" className="content-section" >
-          {/* <div className="section-copy">
+          <div className="section-copy">
             <p className="eyebrow">About The Event</p>
             <h3>Same energy as the reference, but tuned to your logo.</h3>
             <p>
@@ -390,7 +397,7 @@ function LandingPage() {
               <h4>Community Reach</h4>
               <p>Use this for schools, teams, partners, and ecosystem notes.</p>
             </article>
-          </div> */}
+          </div>
 
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">Spain-Morocco Forum</p>
@@ -423,7 +430,7 @@ function LandingPage() {
             </div>
           </div>
 
-        </section> */}
+        </section>
 
         <section className="content-section sponsors-section">
           <div className="section-heading">
@@ -495,7 +502,7 @@ function LandingPage() {
           </div>
         </section>
 
-        {/* <section className="content-section">
+        <section className="content-section">
           <div className="section-heading">
             <p className="eyebrow">Speakers</p>
             <h3>Explore Our lineup of industry experts</h3>
@@ -524,9 +531,9 @@ function LandingPage() {
               </article>
             ))}
           </div>
-        </section> */}
+        </section>
 
-        {/* <section id="agenda" className="content-section agenda-section">
+        <section id="agenda" className="content-section agenda-section">
           <div className="section-heading">
             <p className="eyebrow">Agenda</p>
             <h3>Explore Our Event Schedule</h3>
@@ -567,9 +574,9 @@ function LandingPage() {
               ))}
             </div>
           </div>
-        </section> */}
+        </section>
 
-        {/* <section id="ctf" className="content-section two-column-section">
+        <section id="ctf" className="content-section two-column-section">
           <div className="section-copy">
             <p className="eyebrow">CTF Experience</p>
             <h3>Space for your challenge tracks, scoring model, and finals.</h3>
@@ -603,7 +610,7 @@ function LandingPage() {
               Add CTF Signup Link Later
             </Link>
           </div>
-        </section> */}
+        </section>
 
         <section id='rewards' className="content-section">
           <div className="section-heading">
