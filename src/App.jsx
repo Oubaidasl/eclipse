@@ -312,7 +312,7 @@ function LandingPage() {
 
               <nav className="site-nav" aria-label="Primary">
                 <a href="#about">About</a>
-                {/* <a href="#agenda">Agenda</a> */}
+                <a href="#agenda">Agenda</a>
                 <a href="#rewards">Prizes</a>
                 <a href="#faq">FAQ</a>
               </nav>
@@ -356,17 +356,17 @@ function LandingPage() {
 
         
 
-        <section className="stats-section">
+        {/* <section className="stats-section">
           {statCards.map((stat) => (
             <article key={stat.label} className="stat-card">
               <span>{stat.label}</span>
               <strong>{stat.value}</strong>
             </article>
           ))}
-        </section>
+        </section> */}
 
         <section id="about" className="content-section" >
-          <div className="section-copy">
+          {/* <div className="section-copy">
             <p className="eyebrow">About The Event</p>
             <h3>Same energy as the reference, but tuned to your logo.</h3>
             <p>
@@ -397,7 +397,7 @@ function LandingPage() {
               <h4>Community Reach</h4>
               <p>Use this for schools, teams, partners, and ecosystem notes.</p>
             </article>
-          </div>
+          </div> */}
 
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">Spain-Morocco Forum</p>
@@ -576,7 +576,7 @@ function LandingPage() {
           </div>
         </section>
 
-        <section id="ctf" className="content-section two-column-section">
+        {/* <section id="ctf" className="content-section two-column-section">
           <div className="section-copy">
             <p className="eyebrow">CTF Experience</p>
             <h3>Space for your challenge tracks, scoring model, and finals.</h3>
@@ -610,7 +610,7 @@ function LandingPage() {
               Add CTF Signup Link Later
             </Link>
           </div>
-        </section>
+        </section> */}
 
         <section id='rewards' className="content-section">
           <div className="section-heading">
