@@ -1,7 +1,18 @@
 import { useMemo, useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 import heroBackgroundVideo from './assets/vidBackground.mp4'
-import raulMesaImage from './assets/pics/Screenshot 2026-05-05 153602.png'
+import antonioImage from './assets/pics/Antonio Gil.png'
+import conchiImage from './assets/pics/Conchi Gordon.png'
+import enriqueImage from './assets/pics/Enrique Rando.png'
+import franciscoImage from './assets/pics/Francisco Gonzalez.png'
+import raulMesaImage from './assets/pics/Raul Mesa.png'
+import brunoImage from './assets/pics/bruno_fernandez.png'
+import ridaImage from './assets/pics/rida_lkhulf.png'
+import kamalImage from './assets/pics/kamal reklaoui.jpg'
+import yahyaImage from './assets/pics/Yahya mohamed.png'
+import ahmedImage from './assets/pics/el aroui ahmed.png'
+import mamadoImage from './assets/pics/mamado colibali.png'
+import wataraImage from './assets/pics/watara lamine.png'
 import sponsor1Image from './assets/sponsor1.jpeg'
 import xlinx from './assets/xlinx.jpeg'
 import sponsor2Image from './assets/sponsor2.png'
@@ -29,27 +40,27 @@ const eventDays = [
   {
     id: 'day-1',
     label: 'Day 1',
-    date: '15 May 2026',
-    focus: 'Opening day with keynote, conference sessions, workshops, and the CTF briefing.',
+    date: '14 May 2026',
+    focus: 'Conferences & Workshops (Salle du Barreau de Tétouan)',
     items: [
-      { time: '08:30', title: 'Accueil & Check-in', meta: 'Arrival window' },
-      { time: '09:30', title: 'Opening Keynote', meta: 'Main stage' },
-      { time: '11:00 - 15:00', title: 'Conference Start to End', meta: 'Conference sessions' },
-      { time: '16:00', title: 'Hands-on Workshops', meta: 'Workshop block' },
-      { time: '18:00', title: 'Briefing CTF & Ending', meta: 'Day 1 close' },
+      { time: '10:00', title: 'Opening Session', meta: 'Opening words & speeches by VIPs and Partners' },
+      { time: '11:00', title: 'Investment Session', meta: 'Francisco González, Raúl Mesa, Toufik Airane' },
+      { time: '12:30', title: 'Coffee Break', meta: 'Networking with participants' },
+      { time: '13:00', title: 'Information Session', meta: 'Conchi Gordon, Antonio Gil, Bruno Fernández, Samira Khouliji' },
+      { time: '15:30', title: 'Ending of Day 1', meta: 'Conferences wrap-up' },
     ],
   },
   {
     id: 'day-2',
     label: 'Day 2',
-    date: '16 May 2026',
-    focus: 'Competition day with the live CTF, closing ceremony, awards, and event wrap-up.',
+    date: '15 May 2026',
+    focus: 'CTF Competition (ENSA Tetouan)',
     items: [
-      { time: '09:30', title: 'CTF & Rules', meta: 'Competition briefing' },
-      { time: '10:30 - 16:30', title: 'CTF Starting and Ending', meta: 'Live competition window' },
-      { time: '17:00', title: 'Closing Ceremony', meta: 'Main stage' },
-      { time: '18:00', title: 'Awards Ceremony', meta: 'Recognition and prizes' },
-      { time: '19:00', title: 'The End!', meta: 'Event close' },
+      { time: '22:30', title: 'Welcoming Participants', meta: 'Opening words & explanation of the rules' },
+      { time: '00:00', title: 'Hacking Night', meta: 'Think, exploit and break to win' },
+      { time: '10:00', title: 'Breakfast Break', meta: 'Morning recharge' },
+      { time: '10:30', title: 'The End!', meta: 'Competition concludes' },
+      { time: '11:30', title: 'Awards Ceremony & Closing Remarks', meta: 'Recognition and prizes' },
     ],
   },
 ]
@@ -59,11 +70,13 @@ const speakers = [
     name: 'Rida Lkhluf',
     role: 'Dr. en ciberseguridad y CEO Cybercrin',
     organization: 'Cybercrin, Universidad de Malaga',
+    image: ridaImage,
   },
   {
-    name: 'Kamal Reklaui',
+    name: 'Kamal Reklaoui',
     role: 'Director de ENSA',
     organization: 'Abdelmalek Essaadi',
+    image: kamalImage,
   },
   {
     name: 'Hamid Aboulas',
@@ -74,53 +87,61 @@ const speakers = [
     name: 'Bruno Fernandez',
     role: 'Director general',
     organization: 'Asac comunicaciones',
+    image: brunoImage,
   },
   {
     name: 'Enrique Rando',
     role: 'Consejero tecnico',
     organization: 'Junta de Andalucia',
+    image: enriqueImage,
   },
   {
     name: 'Raul Mesa',
     role: 'Jefe de area',
     organization: 'Oca Global',
     image: raulMesaImage,
-    featured: true,
   },
   {
     name: 'Antonio Gil',
     role: 'Director general',
     organization: 'Softcom',
+    image: antonioImage,
   },
   {
     name: 'Conchi Gordon',
     role: 'Jefa de proyectos',
     organization: 'Hispasec',
+    image: conchiImage,
   },
   {
     name: 'Francisco Gonzalez',
     role: 'Director de departamento de tecnologia electronica y telecomunicaciones',
     organization: 'Universidad de Malaga',
+    image: franciscoImage,
   },
   {
     name: 'Watara Lamine',
     role: 'Ambassadeur',
     organization: "Cote d'Ivoire",
+    image: wataraImage,
   },
   {
     name: 'Mamado Colibali',
     role: 'Ambassadeur',
     organization: 'Burkina Faso',
+    image: mamadoImage,
   },
   {
     name: 'Yahya Mohamed Lyassa',
     role: 'Ambassadeur',
     organization: 'Iles Comore',
+    image: yahyaImage,
   },
   {
     name: 'Al Aroui Ahmed',
     role: 'Director general',
     organization: 'SDK',
+    image: ahmedImage,
   },
 ]
 
@@ -214,7 +235,7 @@ const faqItems = [
   {
     question: 'Will there be a live CTF?',
     answer:
-      'Yes. There will be a qualification round at 10 may, online, and the final will be held in person at 16 may.',
+      'Yes! The CTF competition will be held in person on 15 May at ENSA Tetouan. All registered teams can participate directly — no qualification required.',
   },
   {
     question: 'Can I join as a solo player or team?',
@@ -248,17 +269,13 @@ function LandingPage() {
       <main>
         <section className="hero-section">
           <div className="hero-video-stage">
-            <div className="hero-background">
-              <video
-                className="hero-background-video"
-                autoPlay
-                muted
-                loop
-                playsInline
-              >
-                <source src={heroBackgroundVideo} type="video/mp4" />
-              </video>
-              <div className="hero-background-overlay" />
+            <div className="hero-animated-bg" />
+            <div className="hero-background-overlay" />
+            
+            <div className="hero-center-logo">
+              <div className="hero-logo-wrapper">
+                <img src="/cg-logo.jpeg" alt="Cyber Guardians Logo" className="hero-main-logo" />
+              </div>
             </div>
 
             <header className="site-header hero-header">
@@ -269,7 +286,7 @@ function LandingPage() {
                   className="brand-logo"
                 />
                 <div>
-                  <p className="eyebrow">North Hacking Day Version 2</p>
+                  <p className="eyebrow">Spain-Morocco Forum of Cybersecurity & AI</p>
                   <h1 className="brand-title">Eclipse</h1>
                 </div>
               </div>
@@ -329,7 +346,7 @@ function LandingPage() {
           ))}
         </section> */}
 
-        <section id="about" className="content-section two-column-section" >
+        <section id="about" className="content-section" >
           {/* <div className="section-copy">
             <p className="eyebrow">About The Event</p>
             <h3>Same energy as the reference, but tuned to your logo.</h3>
@@ -364,14 +381,12 @@ function LandingPage() {
           </div> */}
 
           <div className="hero-copy">
-            <p className="eyebrow hero-eyebrow">Annual Cybersecurity Experience</p>
+            <p className="eyebrow hero-eyebrow">Spain-Morocco Forum</p>
             <h2>
-              A neon-dark event site built for your community, talks, and CTF.
+              The Premier Event for Cybersecurity and AI Collaboration
             </h2>
             <p className="hero-description">
-              This layout mirrors the structure of the reference site while
-              keeping the media slots intentionally empty so you can drop in
-              your own video, speaker images, gallery assets, and sponsor logos.
+              Join industry leaders, experts, and security enthusiasts from Spain and Morocco for an immersive experience. Explore the future of Artificial Intelligence and Cybersecurity through expert conferences, hands-on workshops, and a thrilling Capture The Flag (CTF) competition.
             </p>
 
             <div className="hero-meta">
@@ -405,20 +420,23 @@ function LandingPage() {
           </div>
 
           <div className="sponsor-grid">
-            {sponsors.map((sponsor) => (
-              <article key={sponsor.name} className="sponsor-card">
-                <div className="sponsor-media">
-                  <img
-                    src={sponsor.src}
-                    alt={sponsor.name}
-                    className={`sponsor-image ${sponsor.className ?? ''}`.trim()}
-                  />
-                </div>
-                <div className="sponsor-copy">
-                  <h4>{sponsor.name}</h4>
-                </div>
-              </article>
-            ))}
+            <div className="infinite-slider-track">
+              {/* Duplicate array for seamless infinite scroll */}
+              {[...sponsors, ...sponsors, ...sponsors].map((sponsor, index) => (
+                <article key={`${sponsor.name}-${index}`} className="sponsor-card">
+                  <div className="sponsor-media">
+                    <img
+                      src={sponsor.src}
+                      alt={sponsor.name}
+                      className={`sponsor-image ${sponsor.className ?? ''}`.trim()}
+                    />
+                  </div>
+                  <div className="sponsor-copy">
+                    <h4>{sponsor.name}</h4>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
 
           {/* <div className="organizer-grid">
@@ -446,20 +464,22 @@ function LandingPage() {
           </div>
 
           <div className="partner-grid">
-            {partners.map((partner) => (
-              <article key={partner.name} className="sponsor-card">
-                <div className="sponsor-media">
-                  <img
-                    src={partner.src}
-                    alt={partner.name}
-                    className={`sponsor-image ${partner.className ?? ''}`.trim()}
-                  />
-                </div>
-                <div className="sponsor-copy">
-                  <h4>{partner.name}</h4>
-                </div>
-              </article>
-            ))}
+            <div className="infinite-slider-track">
+              {[...partners, ...partners, ...partners].map((partner, index) => (
+                <article key={`${partner.name}-${index}`} className="sponsor-card">
+                  <div className="sponsor-media">
+                    <img
+                      src={partner.src}
+                      alt={partner.name}
+                      className={`sponsor-image ${partner.className ?? ''}`.trim()}
+                    />
+                  </div>
+                  <div className="sponsor-copy">
+                    <h4>{partner.name}</h4>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
