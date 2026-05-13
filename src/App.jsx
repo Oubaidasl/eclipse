@@ -149,17 +149,17 @@ const speakers = [
 const prizeTiers = [
   {
     place: '1st Place',
-    amount: 'To be announced soon',
+    amount: '3 laptops',
     detail: 'Main event champion reward',
   },
   {
     place: '2nd Place',
-    amount: 'To be announced soon',
+    amount: '3 tablets',
     detail: 'Runner-up team reward',
   },
   {
     place: '3rd Place',
-    amount: 'To be announced soon',
+    amount: '3 smart watches',
     detail: 'Podium team reward',
   },
 ]
