@@ -7,13 +7,17 @@ const emptyPlayer = () => ({
   email: '',
 })
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+const usernamePattern = /^[a-zA-Z0-9_]{3,15}$/
+const teamNamePattern = /^[a-zA-Z0-9_\-\s]{3,25}$/
 
 function validateForm(form) {
   const errors = {}
 
   if (!form.teamName.trim()) {
     errors.teamName = 'Team name is required.'
+  } else if (!teamNamePattern.test(form.teamName.trim())) {
+    errors.teamName = 'Team name must be 3-25 characters and contain only letters, numbers, underscores, dashes, and spaces.'
   }
 
   if (!form.organizationId) {
@@ -25,8 +29,10 @@ function validateForm(form) {
 
     if (!player.full_name.trim()) {
       nextError.full_name = `Player ${index + 1} full name is required.`
+    } else if (!usernamePattern.test(player.full_name.trim())) {
+      nextError.full_name = `Player ${index + 1} full name must be 3-15 characters and contain only letters, numbers, and underscores.`
     }
-
+    
     if (!player.email.trim()) {
       nextError.email = `Player ${index + 1} email is required.`
     } else if (!emailPattern.test(player.email.trim())) {
@@ -226,9 +232,10 @@ export default function TeamRegistrationForm({ supabase }) {
               name="teamName"
               type="text"
               value={form.teamName}
-              onChange={(event) =>
-                setForm((current) => ({ ...current, teamName: event.target.value }))
-              }
+              onChange={(event) => {
+                const sanitized = event.target.value.replace(/[^a-zA-Z0-9_\-\s]/g, '').slice(0, 25)
+                setForm((current) => ({ ...current, teamName: sanitized }))
+              }}
               aria-invalid={Boolean(errors.teamName)}
               aria-describedby={errors.teamName ? 'team-name-error' : undefined}
             />
@@ -298,14 +305,16 @@ export default function TeamRegistrationForm({ supabase }) {
 
                 <div className="registration-grid">
                   <div className="field-group">
-                    <label htmlFor={`player-${index + 1}-full-name`}>Full Name</label>
+                    <label htmlFor={`player-${index + 1}-full-name`}>Username (Pseudo)</label>
                     <input
                       id={`player-${index + 1}-full-name`}
                       type="text"
+                      placeholder="e.g. cyber_warrior"
                       value={player.full_name}
-                      onChange={(event) =>
-                        updatePlayer(index, 'full_name', event.target.value)
-                      }
+                      onChange={(event) => {
+                        const sanitized = event.target.value.replace(/[^\w]/g, '').slice(0, 15)
+                        updatePlayer(index, 'full_name', sanitized)
+                      }}
                       aria-invalid={Boolean(playerError.full_name)}
                     />
                     {playerError.full_name ? (
