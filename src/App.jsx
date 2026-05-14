@@ -715,7 +715,7 @@ function RegistrationPage() {
         </div>
       </div>
       <main className="registration-page">
-        <header className="registration-page-header">
+        {/* <header className="registration-page-header">
           <Link to="/" className="secondary-action">
             <FiArrowRight className="back-arrow" />
             Back To Event
@@ -728,7 +728,7 @@ function RegistrationPage() {
               three players. Player 1 is saved as the team leader.
             </p>
           </div>
-        </header>
+        </header> */}
 
         <TeamRegistrationForm supabase={supabase} />
       </main>

@@ -1,380 +1,122 @@
-import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import organizerLogo from '../assets/CB-logo.png'
+import { FiArrowLeft, FiArrowRight, FiMapPin, FiClock, FiShield, FiCalendar, FiLock } from 'react-icons/fi'
 
-const maxPlayers = 3
-
-const emptyPlayer = () => ({
-  full_name: '',
-  email: '',
-})
-
-const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-const usernamePattern = /^[a-zA-Z0-9_]{3,15}$/
-const teamNamePattern = /^[a-zA-Z0-9_\-\s]{3,25}$/
-
-function validateForm(form) {
-  const errors = {}
-
-  if (!form.teamName.trim()) {
-    errors.teamName = 'Team name is required.'
-  } else if (!teamNamePattern.test(form.teamName.trim())) {
-    errors.teamName = 'Team name must be 3-25 characters and contain only letters, numbers, underscores, dashes, and spaces.'
-  }
-
-  if (!form.organizationId) {
-    errors.organizationId = 'Please choose an organization.'
-  }
-
-  const playerErrors = form.players.map((player, index) => {
-    const nextError = {}
-
-    if (!player.full_name.trim()) {
-      nextError.full_name = `Player ${index + 1} full name is required.`
-    } else if (!usernamePattern.test(player.full_name.trim())) {
-      nextError.full_name = `Player ${index + 1} full name must be 3-15 characters and contain only letters, numbers, and underscores.`
-    }
-    
-    if (!player.email.trim()) {
-      nextError.email = `Player ${index + 1} email is required.`
-    } else if (!emailPattern.test(player.email.trim())) {
-      nextError.email = `Player ${index + 1} email must be valid.`
-    }
-
-    return nextError
-  })
-
-  const normalizedEmails = form.players.map((player) => player.email.trim().toLowerCase())
-
-  normalizedEmails.forEach((email, index) => {
-    if (!email) {
-      return
-    }
-
-    if (normalizedEmails.indexOf(email) !== index) {
-      playerErrors[index].email = `Player ${index + 1} email must be unique in this team.`
-    }
-  })
-
-  if (playerErrors.some((entry) => Object.keys(entry).length > 0)) {
-    errors.players = playerErrors
-  }
-
-  return errors
-}
-
-export default function TeamRegistrationForm({ supabase }) {
-  const [organizations, setOrganizations] = useState([])
-  const [form, setForm] = useState({
-    teamName: '',
-    organizationId: '',
-    players: [emptyPlayer()],
-  })
-  const [errors, setErrors] = useState({})
-  const [isLoadingOrganizations, setIsLoadingOrganizations] = useState(true)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [status, setStatus] = useState({ type: '', message: '' })
-
-  useEffect(() => {
-    let isMounted = true
-
-    async function loadOrganizations() {
-      if (!supabase) {
-        if (isMounted) {
-          setIsLoadingOrganizations(false)
-          setStatus({
-            type: 'error',
-            message: 'Supabase client is not configured yet.',
-          })
-        }
-        return
-      }
-
-      setIsLoadingOrganizations(true)
-
-      const { data, error } = await supabase
-        .from('organizations')
-        .select('id, name')
-        .order('name', { ascending: true })
-
-      if (!isMounted) {
-        return
-      }
-
-      if (error) {
-        setStatus({
-          type: 'error',
-          message: error.message || 'Unable to load organizations.',
-        })
-        setOrganizations([])
-      } else {
-        setOrganizations(
-          (data ?? []).sort((a, b) => {
-            if (a.name.toLowerCase() === 'others') return 1
-            if (b.name.toLowerCase() === 'others') return -1
-            return 0  // already sorted by Supabase, no need to re-sort the rest
-          })
-        )
-      }
-
-      setIsLoadingOrganizations(false)
-    }
-
-    loadOrganizations()
-
-    return () => {
-      isMounted = false
-    }
-  }, [supabase])
-
-  function updatePlayer(index, field, value) {
-    setForm((current) => ({
-      ...current,
-      players: current.players.map((player, playerIndex) =>
-        playerIndex === index ? { ...player, [field]: value } : player,
-      ),
-    }))
-  }
-
-  function addPlayer() {
-    setForm((current) => {
-      if (current.players.length >= maxPlayers) {
-        return current
-      }
-
-      return {
-        ...current,
-        players: [...current.players, emptyPlayer()],
-      }
-    })
-  }
-
-  function removePlayer(index) {
-    setForm((current) => ({
-      ...current,
-      players: current.players.filter((_, playerIndex) => playerIndex !== index),
-    }))
-  }
-
-  async function handleSubmit(event) {
-    event.preventDefault()
-
-    const nextErrors = validateForm(form)
-    setErrors(nextErrors)
-    setStatus({ type: '', message: '' })
-
-    if (Object.keys(nextErrors).length > 0) {
-      setStatus({
-        type: 'error',
-        message: 'Please fix the highlighted fields and try again.',
-      })
-      return
-    }
-
-    if (!supabase) {
-      setStatus({
-        type: 'error',
-        message: 'Supabase client is not configured yet.',
-      })
-      return
-    }
-
-    setIsSubmitting(true)
-
-    const payload = {
-      p_team_name: form.teamName.trim(),
-      p_organization_id: form.organizationId,
-      p_players: form.players.map((player) => ({
-        full_name: player.full_name.trim(),
-        email: player.email.trim().toLowerCase(),
-      })),
-    }
-
-    const { error } = await supabase.rpc('register_team', payload)
-
-    if (error) {
-      setStatus({
-        type: 'error',
-        message: error.message || 'Registration failed.',
-      })
-      setIsSubmitting(false)
-      return
-    }
-
-    setStatus({
-      type: 'success',
-      message: 'Team registration completed successfully.',
-    })
-    setErrors({})
-    setForm({
-      teamName: '',
-      organizationId: '',
-      players: [emptyPlayer()],
-    })
-    setIsSubmitting(false)
-  }
-
+export default function RegistrationPage() {
   return (
-    <section className="registration-shell" aria-labelledby="registration-heading">
-      <div className="registration-header">
-        <p className="eyebrow">Registration</p>
-        <h2 id="registration-heading">Register your team</h2>
-        <p>
-          Player 1 becomes the team leader automatically when the form is
-          submitted.
-        </p>
+    <div className="page-shell registration-page-shell">
+
+      {/* Watermark — same as LandingPage */}
+      <div className="site-watermark" aria-hidden="true">
+        <img src={organizerLogo} alt="" className="site-watermark-logo" />
+        <div className="site-watermark-copy">
+          <span>Organized by:</span>
+          <strong>Club CyberGuardians ENSATE</strong>
+        </div>
       </div>
 
-      <form className="registration-form" onSubmit={handleSubmit} noValidate>
-        <div className="registration-grid">
-          <div className="field-group">
-            <label htmlFor="team-name">Team Name</label>
-            <input
-              id="team-name"
-              name="teamName"
-              type="text"
-              value={form.teamName}
-              onChange={(event) => {
-                const sanitized = event.target.value.replace(/[^a-zA-Z0-9_\-\s]/g, '').slice(0, 25)
-                setForm((current) => ({ ...current, teamName: sanitized }))
-              }}
-              aria-invalid={Boolean(errors.teamName)}
-              aria-describedby={errors.teamName ? 'team-name-error' : undefined}
-            />
-            {errors.teamName ? (
-              <span id="team-name-error" className="field-error">
-                {errors.teamName}
+      <main className="registration-page">
+
+        {/* Back button header */}
+        <header className="registration-page-header">
+          <Link to="/" className="secondary-action">
+            <FiArrowLeft className="back-arrow" />
+            Back To Event
+          </Link>
+          <div className="registration-page-copy">
+            <p className="eyebrow">Team Registration</p>
+            <h1>Register your team</h1>
+            <p>
+              Online registration is now closed. See below for how to still join.
+            </p>
+          </div>
+        </header>
+
+        {/* Main card — same structure as TeamRegistrationForm */}
+        <div className="reg-form-card">
+
+          {/* Closed badge */}
+          <div className="reg-closed-badge">
+            <span className="reg-closed-dot" />
+            Registration Closed
+          </div>
+
+          <p className="eyebrow">Registration</p>
+          <h2 className="reg-card-title">Register your team</h2>
+          <p className="reg-card-sub">
+            Player 1 becomes the team leader automatically when the form is submitted.
+          </p>
+
+          {/* Expired message box */}
+          <div className="reg-expired-box">
+            <div className="reg-expired-icon">
+              <FiLock size={26} />
+            </div>
+            <h3 className="reg-expired-title">Online Registration Has Expired</h3>
+            <p className="reg-expired-body">
+              The online registration window for Eclipse is now closed.
+              <br />
+              But don't worry — you can still join the CTF competition!
+            </p>
+            <div className="reg-expired-callout">
+              <p className="reg-expired-callout-label">Come in person to</p>
+              <p className="reg-expired-callout-venue">ENSA Tetouan</p>
+              <p className="reg-expired-callout-time">10:30 PM</p>
+              <p className="reg-expired-callout-label">to register on-site and play</p>
+            </div>
+          </div>
+
+          {/* Info grid */}
+          <div className="reg-info-grid">
+            <div className="reg-info-box">
+              <span className="reg-info-label">Location</span>
+              <span className="reg-info-value">
+                <FiMapPin />
+                ENSA Tetouan
               </span>
-            ) : null}
-          </div>
-
-          <div className="field-group">
-            <label htmlFor="organization">Organization</label>
-            <select
-              id="organization"
-              name="organizationId"
-              value={form.organizationId}
-              onChange={(event) =>
-                setForm((current) => ({
-                  ...current,
-                  organizationId: event.target.value,
-                }))
-              }
-              disabled={isLoadingOrganizations}
-              aria-invalid={Boolean(errors.organizationId)}
-              aria-describedby={errors.organizationId ? 'organization-error' : undefined}
-            >
-              <option value="">
-                {isLoadingOrganizations ? 'Loading organizations...' : 'Select an organization'}
-              </option>
-              {organizations.map((organization) => (
-                <option key={organization.id} value={organization.id}>
-                  {organization.name}
-                </option>
-              ))}
-            </select>
-            {errors.organizationId ? (
-              <span id="organization-error" className="field-error">
-                {errors.organizationId}
+            </div>
+            <div className="reg-info-box">
+              <span className="reg-info-label">Check-in Time</span>
+              <span className="reg-info-value">
+                <FiClock />
+                10:30 PM
               </span>
-            ) : null}
+            </div>
+            <div className="reg-info-box">
+              <span className="reg-info-label">Event</span>
+              <span className="reg-info-value">
+                <FiShield />
+                Eclipse CTF Night
+              </span>
+            </div>
+            <div className="reg-info-box">
+              <span className="reg-info-label">Date</span>
+              <span className="reg-info-value">
+                <FiCalendar />
+                15 May 2026
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div className="players-stack">
-          {form.players.map((player, index) => {
-            const playerError = errors.players?.[index] ?? {}
-            const isLeader = index === 0
+          <hr className="reg-divider" />
 
-            return (
-              <article key={`player-${index + 1}`} className="player-card">
-                <div className="player-card-header">
-                  <div>
-                    <h3>Player {index + 1}</h3>
-                    {isLeader ? <span className="player-label">Leader</span> : null}
-                  </div>
-
-                  {!isLeader ? (
-                    <button
-                      type="button"
-                      className="action-button is-danger"
-                      onClick={() => removePlayer(index)}
-                    >
-                      Remove player
-                    </button>
-                  ) : null}
-                </div>
-
-                <div className="registration-grid">
-                  <div className="field-group">
-                    <label htmlFor={`player-${index + 1}-full-name`}>Username (Pseudo)</label>
-                    <input
-                      id={`player-${index + 1}-full-name`}
-                      type="text"
-                      placeholder="e.g. cyber_warrior"
-                      value={player.full_name}
-                      onChange={(event) => {
-                        const sanitized = event.target.value.replace(/[^\w]/g, '').slice(0, 15)
-                        updatePlayer(index, 'full_name', sanitized)
-                      }}
-                      aria-invalid={Boolean(playerError.full_name)}
-                    />
-                    {playerError.full_name ? (
-                      <span className="field-error">{playerError.full_name}</span>
-                    ) : null}
-                  </div>
-
-                  <div className="field-group">
-                    <label htmlFor={`player-${index + 1}-email`}>Email</label>
-                    <input
-                      id={`player-${index + 1}-email`}
-                      type="email"
-                      inputMode="email"
-                      value={player.email}
-                      onChange={(event) => updatePlayer(index, 'email', event.target.value)}
-                      aria-invalid={Boolean(playerError.email)}
-                    />
-                    {playerError.email ? (
-                      <span className="field-error">{playerError.email}</span>
-                    ) : null}
-                  </div>
-                </div>
-              </article>
-            )
-          })}
-        </div>
-
-        <div className="registration-actions">
-          <button
-            type="button"
-            className="action-button"
-            onClick={addPlayer}
-            disabled={form.players.length >= maxPlayers || isSubmitting}
-          >
-            + Add Player
-          </button>
-          <span className="registration-help">
-            {form.players.length} / {maxPlayers} players added
-          </span>
-        </div>
-
-        {status.message ? (
-          <div
-            className={
-              status.type === 'success'
-                ? 'status-banner is-success'
-                : 'status-banner is-error'
-            }
-            role="status"
-          >
-            {status.message}
+          {/* CTA row */}
+          <div className="reg-cta-row">
+            <div>
+              <h4 className="reg-cta-title">Still want to compete?</h4>
+              <p className="reg-cta-sub">
+                Show up at ENSA Tetouan tonight at 10:30 PM.<br />
+                Bring your team and register at the door.
+              </p>
+            </div>
+            <Link to="/#agenda" className="primary-action">
+              View Schedule
+              <FiArrowRight />
+            </Link>
           </div>
-        ) : null}
 
-        <div className="registration-footer">
-          <button type="submit" className="primary-action" disabled={isSubmitting}>
-            {isSubmitting ? 'Registering...' : 'Submit Registration'}
-          </button>
         </div>
-      </form>
-    </section>
+      </main>
+    </div>
   )
 }
