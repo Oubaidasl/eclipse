@@ -1,0 +1,9 @@
+export const ctfSummary = { challenges: 24, teams: 19, solves: 192 }
+
+export const scoreboard = [
+  ['B0t4f0g0', 4860], ['BTATAGODS', 4360], ['As4tir S4h4ra', 4240], ['khaliha 3ala lah', 4060], ['Enigma', 3520], ['.4n71bubu', 3520], ['ICode Club Only', 2960], ['INDEX.HTML', 2720], ['sn3ff3r5', 2660], ['B4rdin Lktaf', 2340], ['Chabiba', 2000], ['G.O.W.A.T.S', 1740], ['Studio-lab', 1600], ['AnarchoTech', 1000], ['hmida cyber', 600], ['cyber_teamX', 400], ['cybercrin', 200], ['Test', 200],
+].map(([team, score], index) => ({ place: index + 1, team, score }))
+
+export const challenges = [
+  ['Echo_Pattern', 260, 'Crypto', 'easy', 7], ['Broken_Handshake', 200, 'Crypto', 'easy', 16], ['Silent_Channel', 300, 'Crypto', 'hard', 6], ['The_Core', 200, 'Crypto', 'hard', 10], ['Operation-Helios', 260, 'OSINT', 'easy', 7], ['Operation-Z09', 380, 'OSINT', 'medium', 4], ['Operation-Morpheus', 340, 'OSINT', 'easy', 5], ['Ghost Dispatch', 200, 'Rev', 'medium', 14], ['Shadow Matrix', 200, 'Rev', 'hard', 13], ['Tome', 500, 'Web', 'medium', 0], ['Suds And Secrets', 500, 'Web', 'medium', 0], ['sibyl', 500, 'Web', 'medium', 0], ['Eclipse', 460, 'Web', 'medium', 2], ['Small click', 200, 'DFIR', 'medium', 13], ['Shadow Exfiltration', 200, 'DFIR', 'easy', 14], ['Signal_of_shadows', 200, 'Rev', 'medium', 11], ['Juctice', 300, 'MISC', 'medium', 6], ['disk-challenge', 200, 'DFIR', 'easy', 12], ['insane_challenge', 500, 'DFIR', 'insane', 0], ['Word-challenge', 200, 'DFIR', 'medium', 11], ['bl4ck_signal', 200, 'Rev', 'easy', 16], ['ISSAWA CITY - The Northern Gate', 200, 'Pwn', 'medium', 14], ['ISSAWA CITY - The Southern Gate', 200, 'Pwn', 'medium', 9], ['corrupted-oracle', 500, 'Crypto', 'insane', 0],
+].map(([name, points, category, difficulty, solves], index) => ({ id: index + 1, name, points, category, difficulty, solves }))

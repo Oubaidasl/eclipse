@@ -25,6 +25,7 @@ import softcom from './assets/softcom.jpeg'
 import c from './assets/c.jpg'
 import TeamRegistrationForm from './components/TeamRegistrationForm'
 import { supabase } from './lib/supabase'
+import { challenges, ctfSummary, scoreboard } from './data/ctfResults'
 import {
   FiArrowRight,
   FiCalendar,
@@ -314,6 +315,7 @@ function LandingPage() {
                 <a href="#about">About</a>
                 <a href="#agenda">Agenda</a>
                 <a href="#rewards">Prizes</a>
+                <Link to="/results">CTF Results</Link>
                 <a href="#faq">FAQ</a>
               </nav>
             </header>
@@ -736,11 +738,28 @@ function RegistrationPage() {
   )
 }
 
+function ResultsPage() {
+  const [category, setCategory] = useState('All')
+  const categories = ['All', ...new Set(challenges.map((challenge) => challenge.category))]
+  const visibleChallenges = category === 'All' ? challenges : challenges.filter((challenge) => challenge.category === category)
+
+  return <div className="page-shell results-page-shell">
+    <header className="site-header results-header"><Link to="/" className="secondary-action">← Back to Eclipse</Link><div className="brand-lockup results-brand"><img src="/cg-logo.jpeg" alt="Cyber Guardians logo" className="brand-logo" /><div><p className="eyebrow">Eclipse 2026</p><h1 className="brand-title">CTF Results</h1></div></div></header>
+    <main className="results-main">
+      <section className="results-intro"><p className="eyebrow">Competition archive</p><h2>Eclipse Capture The Flag</h2><p>Final rankings and challenge outcomes from the competition.</p></section>
+      <section className="results-stat-grid" aria-label="CTF summary"><article><strong>{ctfSummary.teams}</strong><span>Registered teams</span></article><article><strong>{ctfSummary.challenges}</strong><span>Challenges</span></article><article><strong>{ctfSummary.solves}</strong><span>Recorded solves</span></article></section>
+      <section className="results-section"><div className="section-heading"><p className="eyebrow">Leaderboard</p><h3>Final standings</h3></div><div className="leaderboard-card"><div className="leaderboard-row leaderboard-label"><span>Rank</span><span>Team</span><span>Score</span></div>{scoreboard.map((entry) => <div className={`leaderboard-row ${entry.place <= 3 ? 'is-podium' : ''}`} key={entry.team}><strong>#{entry.place}</strong><span>{entry.team}</span><strong>{entry.score.toLocaleString()}</strong></div>)}</div></section>
+      <section className="results-section"><div className="challenge-heading"><div className="section-heading"><p className="eyebrow">Challenge catalogue</p><h3>Competition challenges</h3></div><label className="challenge-filter">Category<select value={category} onChange={(event) => setCategory(event.target.value)}>{categories.map((item) => <option key={item}>{item}</option>)}</select></label></div><div className="challenge-grid">{visibleChallenges.map((challenge) => <article className="challenge-card" key={challenge.id}><div className="challenge-card-top"><span className="challenge-category">{challenge.category}</span><span className={`difficulty difficulty-${challenge.difficulty}`}>{challenge.difficulty}</span></div><h4>{challenge.name}</h4><div className="challenge-metrics"><span>{challenge.points} pts</span><span>{challenge.solves} solves</span></div></article>)}</div></section>
+    </main>
+  </div>
+}
+
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/register" element={<RegistrationPage />} />
+      <Route path="/results" element={<ResultsPage />} />
     </Routes>
   )
 }
